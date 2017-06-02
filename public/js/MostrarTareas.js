@@ -18,7 +18,6 @@ $(document).ready(function(){
 
   }]);
 
-  //cargarTareas();
 });
 
 function cargarTareas(){
