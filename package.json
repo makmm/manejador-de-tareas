@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/makmm/manejador-de-tareas/issues"
   },
-  "homepage": "https://github.com/makmm/manejador-de-tareas#readme"
+  "homepage": "https://github.com/makmm/manejador-de-tareas#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongodb": "^2.2.27"
+  }
 }
