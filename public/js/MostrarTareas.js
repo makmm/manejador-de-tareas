@@ -1,17 +1,49 @@
-var tareas = [
-  {
-    "nombre": "TP matematica",
-    "descripcion": "Pag. 12 a 14"
-  },
-  {
-    "nombre": "TP sociales",
-    "descripcion": "Pag. 102 a 106"
-  }
-];
+var app;
+var controller;
 
 $(document).ready(function(){
+  app = angular.module('manejador-de-tareas', []);
+
+  app.controller('TareasController', ['$http', '$log', function($http, $log){
+    var tareasCtrl = this;
+    tareasCtrl.tareas = {};
+    $http({
+      method: 'GET',
+      url: '/tareas.json'
+    }).then(function successCallback(response) {
+      tareasCtrl.tareas = response.data;
+    }, function errorCallback(response) {
+
+    });
+
+  }]);
+
+  //cargarTareas();
+});
+
+function cargarTareas(){
+  $.get({
+    url: '/tareas.json',
+    data: {}, // Aca hay que poner las tareas que queremos buscar
+    success: (data) => {
+      actualizarTareas(data);
+    },
+    error: (err) => {
+      console.log(err);
+      var errorTemplate = Handlebars.compile($("#template-error").html());
+      $("main").html(errorTemplate({error: err}));
+    }
+  });
+}
+
+function actualizarTareas(tareas){
   var template = Handlebars.compile($("#template-tarea").html());
   for(var i in tareas){
     $("#tareas-body").append(template(tareas[i]));
   }
-});
+}
+
+function reintentar(){
+  $(this).remove();
+  cargarTareas();
+}
