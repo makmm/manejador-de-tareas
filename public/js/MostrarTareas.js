@@ -35,6 +35,8 @@ $(document).ready(function(){
         }
       }).then(function successCallback(response) {
         // Chequear si funcionó
+        console.log(response.data);
+        tareasCtrl.recargarTareas();
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,
