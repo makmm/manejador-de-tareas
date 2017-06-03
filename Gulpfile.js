@@ -4,8 +4,8 @@ var path = require('path');
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var ObjectID = mongodb.ObjectID;
-var mongodb = require('mongodb');
-var Mondb;
+
+var db;
 
 gulp.task('mongo', function(){
   assert = require('assert');
@@ -24,11 +24,11 @@ gulp.task('express', function(){
 
   app.use(express.static(__dirname + '/public'));
 
-  app.get('/tareas.json', (request, response) => {
+  app.get('/tareas.json', (req, res) => {
     tareas = db.collection('tareas');
 
     tareas.find({ /* aca abria que poner la busqueda que quiere el usuario */ }).toArray((err, data) => {
-      response.send(data);
+      res.send(data);
     });
   });
 
