@@ -1,5 +1,4 @@
 var app;
-var controller;
 
 $(document).ready(function(){
   app = angular.module('manejador-de-tareas', []);
