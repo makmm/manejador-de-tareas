@@ -11,9 +11,9 @@ gulp.task('mongo', function(){
   assert = require('assert');
 
   MongoClient.connect('mongodb://localhost:27017/manejador-de-tareas', (err, connectiondb) => {
-      assert.equal(null, err);
+    assert.equal(null, err);
 
-      db = connectiondb;
+    db = connectiondb;
   });
 });
 
@@ -28,7 +28,7 @@ gulp.task('express', function(){
     tareas = db.collection('tareas');
 
     tareas.find({ /* aca abria que poner la busqueda que quiere el usuario */ }).toArray((err, data) => {
-        response.send(data);
+      response.send(data);
     });
   });
 
