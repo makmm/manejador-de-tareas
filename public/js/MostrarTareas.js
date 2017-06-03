@@ -25,30 +25,3 @@ $(document).ready(function(){
   }]);
 
 });
-
-function cargarTareas(){
-  $.get({
-    url: '/tareas.json',
-    data: {}, // Aca hay que poner las tareas que queremos buscar
-    success: (data) => {
-      actualizarTareas(data);
-    },
-    error: (err) => {
-      console.log(err);
-      var errorTemplate = Handlebars.compile($("#template-error").html());
-      $("main").html(errorTemplate({error: err}));
-    }
-  });
-}
-
-function actualizarTareas(tareas){
-  var template = Handlebars.compile($("#template-tarea").html());
-  for(var i in tareas){
-    $("#tareas-body").append(template(tareas[i]));
-  }
-}
-
-function reintentar(){
-  $(this).remove();
-  cargarTareas();
-}
