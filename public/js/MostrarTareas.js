@@ -24,6 +24,25 @@ $(document).ready(function(){
          */
       });
     }
+
+    tareasCtrl.eliminarTarea = (id) => {
+      $http({
+        method: 'DELETE',
+        url: '/eliminarTarea',
+        data: {id: id},
+        headers: {
+          'Content-type': 'application/json;charset=utf-8'
+        }
+      }).then(function successCallback(response) {
+        // Chequear si funcionó
+      }, function errorCallback(response) {
+        /*
+         * Boton de reintentar,
+         * sin contador
+         */
+      });
+    };
+
     tareasCtrl.recargarTareas();
 
   }]);

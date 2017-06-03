@@ -56,12 +56,19 @@
             <tr>
               <th>Nombre</th>
               <th>Descripción</th>
+              <th>Eliminar</th>
             </tr>
           </thead>
           <tbody ng-controller="TareasController as tareasCtrl" id="tareas-body">
             <tr ng-repeat="tarea in tareasCtrl.tareas">
               <td>{{tarea.nombre}}</td>
               <td>{{tarea.descripcion}}</td>
+              <td>
+                <button ng-click="tareasCtrl.eliminarTarea(tarea._id)" 
+                        class="btn btn-danger">
+                  Eliminar
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>

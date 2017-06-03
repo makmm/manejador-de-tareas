@@ -4,6 +4,7 @@ var path = require('path');
 var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var ObjectID = mongodb.ObjectID;
+var bodyParser = require('body-parser');
 
 var db;
 
@@ -23,6 +24,7 @@ gulp.task('express', function(){
   var app = express();
 
   app.use(express.static(__dirname + '/public'));
+  app.use(bodyParser.json());
 
   app.get('/tareas.json', (req, res) => {
     tareas = db.collection('tareas');
@@ -30,6 +32,18 @@ gulp.task('express', function(){
     tareas.find({ /* aca abria que poner la busqueda que quiere el usuario */ }).toArray((err, data) => {
       res.send(data);
     });
+  });
+
+  app.delete('/eliminarTarea', (req, res) => {
+    tareas = db.collection('tareas');
+
+    tareas.remove({_id: ObjectID(req.body.id)}, (err, result) => {
+      if(err){
+        res.send(err);
+        return;
+      }
+      res.send(result);
+    });    
   });
 
   app.listen(8080, function(){
