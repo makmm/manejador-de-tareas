@@ -1,13 +1,13 @@
-var fs = require('fs'),
-    gulp = require('gulp'),
-    path = require('path');
-
-var db;
+var fs = require('fs');
+var gulp = require('gulp');
+var path = require('path');
+var mongodb = require('mongodb');
+var MongoClient = mongodb.MongoClient;
+var ObjectID = mongodb.ObjectID;
+var mongodb = require('mongodb');
+var Mondb;
 
 gulp.task('mongo', function(){
-  mongodb = require('mongodb');
-  MongoClient = mongodb.MongoClient;
-
   assert = require('assert');
 
   MongoClient.connect('mongodb://localhost:27017/manejador-de-tareas', (err, connectiondb) => {
