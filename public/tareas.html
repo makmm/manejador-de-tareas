@@ -49,6 +49,12 @@
       </div><!-- /.container-fluid -->
     </nav>
     <main>
+      <div id="toolbar">
+        <button class="btn btn-primary">
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          Crear Tarea
+        </button>
+      </div>
       <div class="panel panel-default" ng-controller="TareasController as tareasCtrl" id="tareas-body">
         <ul class="list-group">
           <li ng-repeat="tarea in tareasCtrl.tareas" class="tarea list-group-item">
@@ -63,6 +69,9 @@
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
               </button>
             </div>
+          </li>
+          <li ng-show="tareasCtrl.creando" class="tarea list-group-item">
+            
           </li>
         </ul>
       </div>
