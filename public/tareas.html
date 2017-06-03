@@ -58,8 +58,8 @@
               <th>Descripción</th>
             </tr>
           </thead>
-          <tbody ng-controller="TareasController as tareas" id="tareas-body">
-            <tr ng-repeat="tarea in tareas.tareas">
+          <tbody ng-controller="TareasController as tareasCtrl" id="tareas-body">
+            <tr ng-repeat="tarea in tareasCtrl.tareas">
               <td>{{tarea.nombre}}</td>
               <td>{{tarea.descripcion}}</td>
             </tr>
