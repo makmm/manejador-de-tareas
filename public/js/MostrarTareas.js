@@ -5,6 +5,7 @@ $(document).ready(function(){
 
   app.controller('TareasController', ['$http', '$log', function($http, $log){
     var tareasCtrl = this;
+
     tareasCtrl.tareas = {};
     $http({
       method: 'GET',
