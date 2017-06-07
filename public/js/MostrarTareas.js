@@ -11,7 +11,11 @@ $(document).ready(function(){
     tareasCtrl.recargarTareas = function(){
       $http({
         method: 'GET',
-        url: '/tareas.json'
+        url: '/tareas.json',
+        data: {},
+        headers: {
+          'Content-type': 'application/json;charset=utf-8'
+        }
       }).then(function successCallback(response) {
         tareasCtrl.tareas = response.data;
       }, function errorCallback(response) {
