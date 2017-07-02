@@ -3,7 +3,7 @@ var app;
 (function(){
   app = angular.module('manejador-de-tareas', []);
 
-  app.controller('TareasController', ['$http', '$log', function($http, $log){
+  app.controller('TareasController', function($http, $log, $scope){
     var tareasCtrl = this;
 
     tareasCtrl.tareas = {};
