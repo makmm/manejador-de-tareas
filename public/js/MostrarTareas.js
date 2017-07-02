@@ -1,6 +1,6 @@
 var app;
 
-$(document).ready(function(){
+(function(){
   app = angular.module('manejador-de-tareas', []);
 
   app.controller('TareasController', ['$http', '$log', function($http, $log){
