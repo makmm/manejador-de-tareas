@@ -46,6 +46,27 @@ gulp.task('express', function(){
     });    
   });
 
+  app.post('/editarTarea', (req, res) => {
+    console.log(req.body);
+
+    // Reemplaza {_id: "id"} por {_id: ObjectID("id")} para que no de error
+    // ya que no se puede cambiar la id
+    objeto = req.body;
+    objeto._id = ObjectID(req.body._id);
+
+    try {
+      // Reemplazar la tarea con la nueva, editada (despues voy a hacer que solo cambie lo que se cambió)
+      db.collection('tareas').replaceOne({
+        _id: objeto._id
+      }, objeto);
+    } catch(e) {
+      console.log(e);
+    }
+
+    // Enviar -nada- para que el navegador no de timeout
+    res.send();
+  });
+
   app.listen(8080, function(){
     console.log("[Express] Running on port 8080");
   });
