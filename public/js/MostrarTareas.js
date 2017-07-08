@@ -54,9 +54,8 @@ var app;
     };
 
     tareasCtrl.editarTarea = (tarea) => {
-      console.log(tarea);
       $http({
-        method: 'POST',
+        method: 'PATCH',
         url: '/editarTarea',
         data: tarea,
         headers: {
@@ -72,6 +71,31 @@ var app;
       });
 
       tareasCtrl.tareaSiendoEditada = null;
+    };
+
+    tareasCtrl.empezarNuevaTarea = (tarea) => {
+      tareasCtrl.creando = true;
+    };
+
+    tareasCtrl.anadirTarea = (tarea) => {
+      tareasCtrl.creando = false;
+
+      $http({
+        method: 'POST',
+        url: '/crearTarea',
+        data: tarea,
+        headers: {
+          'Content-type': 'application/json;charset=utf-8'
+        }
+      }).then(function successCallback(response) {
+        tareasCtrl.recargarTareas();
+      }, function errorCallback(response) {
+        /*
+         * Boton de reintentar,
+         * sin contador
+         */
+      });
+
     };
 
     /*

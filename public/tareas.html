@@ -47,14 +47,14 @@
       </div><!-- /.container-fluid -->
     </nav>
     <main>
-      <div id="toolbar">
-        <button class="btn btn-primary">
-          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          Crear Tarea
-        </button>
-      </div>
-      <div class="panel panel-default" ng-controller="TareasController as tareasCtrl" id="tareas-body">
-        <ul class="list-group">
+      <div class="" ng-controller="TareasController as tareasCtrl" id="tareas-body">
+        <div id="toolbar">
+          <button class="btn btn-primary" ng-click="tareasCtrl.empezarNuevaTarea();">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Crear Tarea
+          </button>
+        </div>
+        <ul class="list-group panel panel-default">
           <li ng-repeat="tarea in tareasCtrl.tareas" ng-dblclick="tareasCtrl.empezarAEditarTarea(tarea);" class="tarea list-group-item">
             <h4 ng-hide="tareasCtrl.tareaSiendoEditada == tarea">{{tarea.nombre}}</h4>
             <form ng-show="tareasCtrl.tareaSiendoEditada == tarea" ng-submit="tareasCtrl.editarTarea(tarea);">
@@ -71,7 +71,12 @@
             </div>
           </li>
           <li ng-show="tareasCtrl.creando" class="tarea list-group-item">
-            
+            <form ng-submit="tareasCtrl.anadirTarea(nuevaTarea);">
+              <input class="edit form-control" type="edit" ng-model="nuevaTarea.nombre">
+            </form>
+            <form ng-submit="tareasCtrl.anadirTarea(nuevaTarea);">
+              <input class="edit form-control" type="edit" ng-model="nuevaTarea.descripcion">
+            </form>
           </li>
         </ul>
       </div>

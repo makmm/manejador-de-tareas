@@ -44,9 +44,7 @@ gulp.task('express', function(){
     });    
   });
 
-  app.post('/editarTarea', (req, res) => {
-    console.log(req.body);
-
+  app.patch('/editarTarea', (req, res) => {
     // Reemplaza {_id: "id"} por {_id: ObjectID("id")} para que no de error
     // ya que no se puede cambiar la id
     objeto = req.body;
@@ -57,6 +55,20 @@ gulp.task('express', function(){
       db.collection('tareas').replaceOne({
         _id: objeto._id
       }, objeto);
+    } catch(e) {
+      console.log(e);
+    }
+
+    // Enviar -nada- para que el navegador no de timeout
+    res.send();
+  });
+
+  app.post('/crearTarea', (req, res) => {
+    objeto = req.body;
+    delete objeto._id;
+
+    try {
+      db.collection('tareas').insertOne(objeto);
     } catch(e) {
       console.log(e);
     }
