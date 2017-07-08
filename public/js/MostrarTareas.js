@@ -29,16 +29,21 @@ var app;
       });
     }
 
-    tareasCtrl.eliminarTarea = (id) => {
+    tareasCtrl.eliminarTarea = (tarea) => {
+      for(var i = tareasCtrl.tareas.length - 1; i >= 0; i--) {
+        if(tareasCtrl.tareas[i] == tarea){
+          tareasCtrl.tareas.splice(i, 1); 
+        }
+      }
+        
       $http({
         method: 'DELETE',
         url: '/eliminarTarea',
-        data: {id: id},
+        data: {id: tarea._id},
         headers: {
           'Content-type': 'application/json;charset=utf-8'
         }
       }).then(function successCallback(response) {
-        tareasCtrl.recargarTareas();
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,
@@ -60,7 +65,6 @@ var app;
           'Content-type': 'application/json;charset=utf-8'
         }
       }).then(function successCallback(response) {
-        tareasCtrl.recargarTareas();
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,
