@@ -53,6 +53,10 @@
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Crear Tarea
           </button>
+          <button class="btn btn-primary" ng-click="tareasCtrl.recargarTareas();">
+            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+            Recargar
+          </button>
         </div>
         <ul class="list-group panel panel-default">
           <li ng-repeat="tarea in tareasCtrl.tareas track by $index" ng-dblclick="tareasCtrl.empezarAEditarTarea(tarea);" class="tarea list-group-item">
