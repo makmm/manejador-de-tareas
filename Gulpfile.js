@@ -11,7 +11,9 @@ var db;
 gulp.task('mongo', function(){
   assert = require('assert');
 
-  MongoClient.connect('mongodb://localhost:27017/manejador-de-tareas', (err, connectiondb) => {
+  console.log(process.env.mongohost)
+
+  MongoClient.connect(process.env.mongohost, (err, connectiondb) => {
     assert.equal(null, err);
 
     db = connectiondb;
