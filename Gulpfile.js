@@ -35,9 +35,7 @@ gulp.task('express', function(){
   });
 
   app.delete('/eliminarTarea', (req, res) => {
-    tareas = db.collection('tareas');
-
-    tareas.remove({_id: ObjectID(req.body.id)}, (err, result) => {
+    db.collection('tareas').remove({_id: ObjectID(req.body.id)}, (err, result) => {
       if(err){
         res.send(err);
         return;
