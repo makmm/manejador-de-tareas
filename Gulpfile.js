@@ -68,13 +68,12 @@ gulp.task('express', function(){
     delete objeto._id;
 
     try {
-      db.collection('tareas').insertOne(objeto);
+      db.collection('tareas').insert(objeto, {}, (err, tarea) => {
+        res.send(tarea.ops[0]);
+      });
     } catch(e) {
       console.log(e);
     }
-
-    // Enviar -nada- para que el navegador no de timeout
-    res.send();
   });
 
   port = process.env.PORT || 8080;

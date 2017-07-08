@@ -35,7 +35,7 @@ var app;
           tareasCtrl.tareas.splice(i, 1); 
         }
       }
-        
+
       $http({
         method: 'DELETE',
         url: '/eliminarTarea',
@@ -90,7 +90,7 @@ var app;
           'Content-type': 'application/json;charset=utf-8'
         }
       }).then(function successCallback(response) {
-        tareasCtrl.recargarTareas();
+        tareasCtrl.tareas.push(response.data);
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,

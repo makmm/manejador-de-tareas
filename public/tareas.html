@@ -55,7 +55,7 @@
           </button>
         </div>
         <ul class="list-group panel panel-default">
-          <li ng-repeat="tarea in tareasCtrl.tareas" ng-dblclick="tareasCtrl.empezarAEditarTarea(tarea);" class="tarea list-group-item">
+          <li ng-repeat="tarea in tareasCtrl.tareas track by $index" ng-dblclick="tareasCtrl.empezarAEditarTarea(tarea);" class="tarea list-group-item">
             <h4 ng-hide="tareasCtrl.tareaSiendoEditada == tarea">{{tarea.nombre}}</h4>
             <form ng-show="tareasCtrl.tareaSiendoEditada == tarea" ng-submit="tareasCtrl.editarTarea(tarea);">
               <input class="edit" type="edit" ng-model="tarea.nombre">
