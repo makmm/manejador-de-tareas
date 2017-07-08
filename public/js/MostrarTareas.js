@@ -38,8 +38,6 @@ var app;
           'Content-type': 'application/json;charset=utf-8'
         }
       }).then(function successCallback(response) {
-        // Chequear si funcionó
-        console.log(response.data);
         tareasCtrl.recargarTareas();
       }, function errorCallback(response) {
         /*
