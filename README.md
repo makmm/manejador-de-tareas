@@ -9,6 +9,7 @@ npm i
 ```
 ...suponiendo que tenes instalado mongo y configurado para manejador-de-tareas...
 ```
+export mongohost="[Insertar link de mongo, ej: mongodb://localhost:27017/manejador-de-tareas]"
 gulp
 ```
 Listo!
