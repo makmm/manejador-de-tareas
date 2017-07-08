@@ -6,7 +6,7 @@ var app;
   app.controller('TareasController', function($http, $log, $scope){
     var tareasCtrl = this;
 
-    tareasCtrl.tareas = {};
+    tareasCtrl.tareas = [];
 
     tareasCtrl.recargarTareas = function(){
       $http({
