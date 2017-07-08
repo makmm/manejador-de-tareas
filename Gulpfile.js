@@ -11,8 +11,6 @@ var db;
 gulp.task('mongo', function(){
   assert = require('assert');
 
-  console.log(process.env.mongohost)
-
   MongoClient.connect(process.env.mongohost, (err, connectiondb) => {
     assert.equal(null, err);
 
@@ -79,7 +77,7 @@ gulp.task('express', function(){
     res.send();
   });
 
-  app.listen(8080, function(){
+  app.listen(process.env.port || 8080, function(){
     console.log("[Express] Running on port 8080");
   });
 });
