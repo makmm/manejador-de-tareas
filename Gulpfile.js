@@ -77,8 +77,10 @@ gulp.task('express', function(){
     res.send();
   });
 
-  app.listen(process.env.port || 8080, function(){
-    console.log("[Express] Running on port 8080");
+  port = process.env.PORT || 8080;
+
+  app.listen(port, function(){
+    console.log("[Express] Running on port " + port);
   });
 });
 
