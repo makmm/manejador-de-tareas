@@ -32,7 +32,7 @@ var app;
     tareasCtrl.eliminarTarea = (tarea) => {
       for(var i = tareasCtrl.tareas.length - 1; i >= 0; i--) {
         if(tareasCtrl.tareas[i] == tarea){
-          tareasCtrl.tareas.splice(i, 1); 
+          tareasCtrl.tareas.splice(i, 1);
         }
       }
 
@@ -54,6 +54,12 @@ var app;
 
     tareasCtrl.empezarAEditarTarea = (tarea) => {
       tareasCtrl.tareaSiendoEditada = tarea;
+    };
+
+    tareasCtrl.toggleEdicionTarea = (tarea) => {
+      if(tareasCtrl.tareaSiendoEditada == tarea)
+        tareasCtrl.editarTarea(tarea);
+      else tareasCtrl.tareaSiendoEditada = tarea;
     };
 
     tareasCtrl.editarTarea = (tarea) => {

@@ -71,6 +71,9 @@
               </form>
             </div>
             <div class="btn-toolbar btn-group" role="group">
+              <button ng-click="tareasCtrl.toggleEdicionTarea(tarea)" class="btn btn-primary btn-accion-tarea" aria-label="Editar">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+              </button>
               <button ng-click="tareasCtrl.eliminarTarea(tarea)" class="btn btn-danger btn-accion-tarea" aria-label="Eliminar">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
               </button>
