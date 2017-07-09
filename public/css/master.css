@@ -13,7 +13,12 @@ main {
   	display: inline-block;
   	float: right;
   }
-  .tarea h4, 
+  .tarea h4,
   .tarea p {
     display: inline-block;
   }
+
+.editar-tarea {
+  width: 80%;
+  display: inline-block;
+}

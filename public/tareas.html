@@ -61,13 +61,15 @@
         <ul class="list-group panel panel-default">
           <li ng-repeat="tarea in tareasCtrl.tareas track by $index" ng-dblclick="tareasCtrl.empezarAEditarTarea(tarea);" class="tarea list-group-item">
             <h4 ng-hide="tareasCtrl.tareaSiendoEditada == tarea">{{tarea.nombre}}</h4>
-            <form ng-show="tareasCtrl.tareaSiendoEditada == tarea" ng-submit="tareasCtrl.editarTarea(tarea);">
-              <input class="edit" type="edit" ng-model="tarea.nombre">
-            </form>
             <p ng-hide="tareasCtrl.tareaSiendoEditada == tarea">{{tarea.descripcion}}</p>
-            <form ng-show="tareasCtrl.tareaSiendoEditada == tarea" ng-submit="tareasCtrl.editarTarea(tarea);">
-              <input class="edit" type="edit" ng-model="tarea.descripcion">
-            </form>
+            <div class="editar-tarea" ng-show="tareasCtrl.tareaSiendoEditada == tarea">
+              <form ng-submit="tareasCtrl.editarTarea(tarea);">
+                <input ng-model="tarea.nombre" placeholder="Titulo de tarea" class="edit form-control" type="edit">
+              </form>
+              <form ng-submit="tareasCtrl.editarTarea(tarea);">
+                <input ng-model="tarea.descripcion" placeholder="Descripción de tarea" class="edit form-control" type="edit">
+              </form>
+            </div>
             <div class="btn-toolbar btn-group" role="group">
               <button ng-click="tareasCtrl.eliminarTarea(tarea)" class="btn btn-danger btn-accion-tarea" aria-label="Eliminar">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
