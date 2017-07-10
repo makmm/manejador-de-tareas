@@ -19,8 +19,9 @@
   "homepage": "https://github.com/makmm/manejador-de-tareas#readme",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "chalk": "^2.0.1",
     "express": "^4.15.3",
+    "figlet": "^1.2.0",
     "gulp": "^3.9.1",
-    "mongodb": "^2.2.27"
   }
 }

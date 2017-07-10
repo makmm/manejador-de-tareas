@@ -5,8 +5,19 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 var ObjectID = mongodb.ObjectID;
 var bodyParser = require('body-parser');
+var chalk = require('chalk');
+var figlet = require('figlet');
 
 var db;
+
+figlet('manejador-de-tareas', (err, data) => {
+  if(err){
+      console.dir(err);
+      return;
+  }
+  console.log(chalk.bgCyan.red(data))
+  console.log(chalk.bgCyan.red("https://github.com/makmm/manejador-de-tareas"))
+});
 
 gulp.task('mongo', function(){
   assert = require('assert');
