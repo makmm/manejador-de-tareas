@@ -129,6 +129,10 @@ var app;
     tareasCtrl.anadirTarea = (tarea) => {
       tareasCtrl.creando = false;
 
+      if(tarea.materia)
+        tarea.materia = tarea.materia._id;
+      else tarea.materia = tareasCtrl.materias[0]._id;
+
       $http({
         method: 'POST',
         url: '/crearTarea',

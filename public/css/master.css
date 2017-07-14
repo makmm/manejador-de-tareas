@@ -27,7 +27,8 @@ main {
   .tarea .editar-tarea {
     display: inline-block;
   }
-    .tarea .editar-tarea .dropdown {
-      cursor: pointer;
-    }
+
+.dropdown {
+  cursor: pointer;
+}
 

@@ -93,6 +93,18 @@
             <form ng-submit="tareasCtrl.anadirTarea(nuevaTarea);">
               <input ng-model="nuevaTarea.descripcion" placeholder="Descripción de tarea" class="edit form-control" type="edit">
             </form>
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  {{nuevaTarea.materia.nombre || "Materia"}}
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li ng-repeat="materia in tareasCtrl.materias">
+                    <a ng-click="nuevaTarea.materia = materia;">{{materia.nombre}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </li>
         </ul>
       </div>

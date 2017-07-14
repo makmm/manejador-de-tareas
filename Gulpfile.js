@@ -107,7 +107,13 @@ gulp.task('express', function(){
 
     try {
       db.collection('tareas').insert(objeto, {}, (err, tarea) => {
-        res.send(tarea.ops[0]);
+        db.collection('materias').findOne(
+          {_id: ObjectID(tarea.ops[0].materia)}
+        ).then((materia) => {
+          tarea.ops[0].materia = materia;
+
+          res.send(tarea.ops[0]);
+        })
       });
     } catch(e) {
       console.log(e);
