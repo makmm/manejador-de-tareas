@@ -15,8 +15,9 @@ figlet('manejador-de-tareas', (err, data) => {
       console.dir(err);
       return;
   }
-  console.log(chalk.bgCyan.red(data))
-  console.log(chalk.bgCyan.red("https://github.com/makmm/manejador-de-tareas"))
+  console.log(chalk.bgCyan.red("" + 
+    data + "\n" + 
+    "https://github.com/makmm/manejador-de-tareas"))
 });
 
 gulp.task('mongo', function(){
@@ -37,10 +38,37 @@ gulp.task('express', function(){
   app.use(express.static(__dirname + '/public'));
   app.use(bodyParser.json());
 
-  app.get('/tareas.json', (req, res) => {
-    tareas = db.collection('tareas');
+  app.post('/tareas.json', (req, res) => {
+    console.dir(req.body)
+    var tareas = [];
+    
+    db.collection('tareas').find(
+      { /* aca abria que poner la busqueda que quiere el usuario */ }
+    ).toArray()
+    .then((err, response) => {
+      tareas = response;
 
-    tareas.find({ /* aca abria que poner la busqueda que quiere el usuario */ }).toArray((err, data) => {
+      var materias = [];
+      
+      for(var i = 0; i < tareas.length; i++) {
+        materias.push(ObjectID(tareas[i].materia));
+      }
+      
+      db.collection('materias').find(
+        {_id: { $in: materias }}
+      ).toArray()
+      .then((err, materias) => {
+        for(var i = 0; i < tareas.length; i++) {
+          tareas[i].materia = materias.find(m => m._id.equals(ObjectID(tareas[i].materia)))
+        }
+
+        res.send(tareas);
+      })
+    });
+  });
+
+  app.get('/materias.json', (req, res) => {
+    db.collection('materias').find({ /* aca abria que poner la busqueda que quiere el usuario */ }).toArray((err, data) => {
       res.send(data);
     });
   });
