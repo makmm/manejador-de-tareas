@@ -27,6 +27,25 @@ var app;
          * reintentar manualmente.
          */
       });
+
+      $http({
+        method: 'GET',
+        url: '/materias.json',
+        data: {},
+        headers: {
+          'Content-type': 'application/json;charset=utf-8'
+        }
+      }).then(function successCallback(response) {
+        tareasCtrl.materias = response.data;
+      }, function errorCallback(response) {
+        /*
+         * Hacer que aparece una alerta de
+         * esas que te da bootstrap, con
+         * un contador de 30seg de que va a
+         * auto-reintentar, y un botón para
+         * reintentar manualmente.
+         */
+      });
     }
 
     tareasCtrl.eliminarTarea = (tarea) => {
@@ -71,6 +90,28 @@ var app;
           'Content-type': 'application/json;charset=utf-8'
         }
       }).then(function successCallback(response) {
+      }, function errorCallback(response) {
+        /*
+         * Boton de reintentar,
+         * sin contador
+         */
+      });
+
+      tareasCtrl.tareaSiendoEditada = null;
+    };
+
+    tareasCtrl.cambiarMateria = (tarea, materia) => {
+      tarea.materia = materia._id;
+
+      $http({
+        method: 'PATCH',
+        url: '/editarTarea',
+        data: tarea,
+        headers: {
+          'Content-type': 'application/json;charset=utf-8'
+        }
+      }).then(function successCallback(response) {
+        tarea.materia = materia;
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,

@@ -38,14 +38,13 @@ gulp.task('express', function(){
   app.use(express.static(__dirname + '/public'));
   app.use(bodyParser.json());
 
-  app.post('/tareas.json', (req, res) => {
-    console.dir(req.body)
+  app.get('/tareas.json', (req, res) => {
     var tareas = [];
     
     db.collection('tareas').find(
       { /* aca abria que poner la busqueda que quiere el usuario */ }
     ).toArray()
-    .then((err, response) => {
+    .then((response) => {
       tareas = response;
 
       var materias = [];
@@ -57,7 +56,7 @@ gulp.task('express', function(){
       db.collection('materias').find(
         {_id: { $in: materias }}
       ).toArray()
-      .then((err, materias) => {
+      .then((materias) => {
         for(var i = 0; i < tareas.length; i++) {
           tareas[i].materia = materias.find(m => m._id.equals(ObjectID(tareas[i].materia)))
         }

@@ -13,12 +13,18 @@ main {
   	display: inline-block;
   	float: right;
   }
-  .tarea h4,
-  .tarea p {
+  .tarea .info-tarea {
+    display: inline-block;
+  }
+    .tarea .info-tarea h4,
+    .tarea .info-tarea p {
+      display: inline-block;
+    }
+    .tarea .info-tarea .tarea-subinfo {
+      
+    }
+
+  .tarea .editar-tarea {
     display: inline-block;
   }
 
-.editar-tarea {
-  width: 80%;
-  display: inline-block;
-}

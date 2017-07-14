@@ -50,8 +50,14 @@
         </div>
         <ul class="list-group panel panel-default">
           <li ng-repeat="tarea in tareasCtrl.tareas track by $index" ng-dblclick="tareasCtrl.empezarAEditarTarea(tarea);" class="tarea list-group-item">
-            <h4 ng-hide="tareasCtrl.tareaSiendoEditada == tarea">{{tarea.nombre}}</h4>
-            <p ng-hide="tareasCtrl.tareaSiendoEditada == tarea">{{tarea.descripcion}}</p>
+            <div class="info-tarea" ng-hide="tareasCtrl.tareaSiendoEditada == tarea">
+              <h4>{{tarea.nombre}}</h4>
+              <p>{{tarea.descripcion}}</p>
+              <br/>
+              <p class="tarea-subinfo">
+                Materia: <strong>{{tarea.materia.nombre}}</strong>
+              </p>
+            </div>
             <div class="editar-tarea" ng-show="tareasCtrl.tareaSiendoEditada == tarea">
               <form ng-submit="tareasCtrl.editarTarea(tarea);">
                 <input ng-model="tarea.nombre" placeholder="Titulo de tarea" class="edit form-control" type="edit">
@@ -59,6 +65,17 @@
               <form ng-submit="tareasCtrl.editarTarea(tarea);">
                 <input ng-model="tarea.descripcion" placeholder="Descripción de tarea" class="edit form-control" type="edit">
               </form>
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Dropdown
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li ng-repeat="materia in tareasCtrl.materias">
+                    <a ng-click="tareasCtrl.cambiarMateria(tarea, materia)">{{materia.nombre}}</a>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="btn-toolbar btn-group" role="group">
               <button ng-click="tareasCtrl.toggleEdicionTarea(tarea)" class="btn btn-primary btn-accion-tarea" aria-label="Editar">
