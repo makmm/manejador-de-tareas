@@ -82,6 +82,10 @@ var app;
     };
 
     tareasCtrl.editarTarea = (tarea) => {
+      if(tarea.materia)
+        tarea.materia = tarea.materia._id;
+      else tarea.materia = tareasCtrl.materias[0]._id;
+
       $http({
         method: 'PATCH',
         url: '/editarTarea',
@@ -90,6 +94,7 @@ var app;
           'Content-type': 'application/json;charset=utf-8'
         }
       }).then(function successCallback(response) {
+        tarea.materia = tareasCtrl.materias.find(m => m._id.equals(ObjectID(tarea.materia)));
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,
