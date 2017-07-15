@@ -148,43 +148,7 @@ var app;
          * sin contador
          */
       });
-
     };
-
-    /*
-    tareasCtrl.abrirEditarModal = function(tarea){
-      instanciaModal = $uibModal.open({
-        templateUrl: 'editarModalContent.html',
-        controller: function($uibModal){
-          console.log($uibModal);
-          var modalCtrl = this;
-          this.$onInit = function(){
-            $uibModal.tarea = tarea;
-            console.log($uibModal);
-
-          };
-
-          this.ok = function(){
-            $uibModal.close(this.tarea);
-          };
-
-          this.cancel = function(){
-            $uibModal.dismiss('cancel');
-          };
-        },
-        tarea: tarea,
-        resolve: {
-          tarea: function(){
-            console.log(tarea);
-            return tarea;
-          }
-        }
-      });
-        instanciaModal.result.then(function(tarea){
-          //$log.info(tarea);
-        });
-    };
-    */
 
     tareasCtrl.recargarTareas();
 
