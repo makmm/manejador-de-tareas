@@ -100,7 +100,7 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                   <li ng-repeat="materia in tareasCtrl.materias">
-                    <a ng-click="nuevaTarea.materia = materia;">{{materia.nombre}}</a>
+                    <a ng-click="tareasCtrl.setearMateria(tareasCtrl.nuevaTarea, materia);">{{materia.nombre}}</a>
                   </li>
                 </ul>
               </div>

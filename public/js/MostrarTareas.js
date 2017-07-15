@@ -126,6 +126,10 @@ var app;
       tareasCtrl.creando = true;
     };
 
+    tareasCtrl.setearMateria = (tarea, materia) => {
+      tarea.materia = materia;
+    }
+
     tareasCtrl.anadirTarea = (tarea) => {
       tareasCtrl.creando = false;
 
