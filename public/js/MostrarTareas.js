@@ -124,6 +124,7 @@ var app;
 
     tareasCtrl.empezarNuevaTarea = (tarea) => {
       tareasCtrl.creando = true;
+      tareasCtrl.nuevaTarea = {};
     };
 
     tareasCtrl.setearMateria = (tarea, materia) => {
