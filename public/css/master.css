@@ -21,7 +21,7 @@ main {
       display: inline-block;
     }
     .tarea .info-tarea .tarea-subinfo {
-      
+
     }
 
   .tarea .editar-tarea {
@@ -32,3 +32,6 @@ main {
   cursor: pointer;
 }
 
+.nav li {
+  cursor: pointer;
+}
