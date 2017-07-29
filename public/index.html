@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="manejador-de-tareas">
   <head>
   <meta charset="utf-8">
     <title>Manejador de Tareas</title>
@@ -28,7 +28,15 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="/tareas.html">Tareas</a></li>
+            <li ui-sref="tareas" ui-sref-active="active">
+              <a>Tareas</a>
+            </li>
+            <li ui-sref="materias" ui-sref-active="active">
+              <a>Materias</a>
+            </li>
+            <li ui-sref="acercaDe" ui-sref-active="active">
+              <a>Acerca de</a>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Iniciar Sesión</a></li>
@@ -37,16 +45,15 @@
       </div><!-- /.container-fluid -->
     </nav>
     <main>
-      <p>Tene en cuenta que muchas de las cosas a continuación probablemente no estan todavia hechas, pero estan planeadas estarlo en el futuro.</p>
-      <h1>¿Que es manejador-de-tareas?</h1>
-      <p>Es un manejador de tareas <strong>escolares</strong>.</p>
-      <p>Esta hecho para que los alumnxs/docentes colaboren entre ellos para <strong>llegar a la escuela con la tarea hecha</strong>.</p>
-      <p>El docente puede registar la/s tareas en el sistema, y los alumnxs facilmente pueden organizarse (si es un trabajo grupal o invididual) alrededor de eso.</p>
-      <p>Esto es para arreglar el problema de que los alumnos no se acuerdan de las tareas/no las encuentran en su carpeta.</p>
-      <p>Si el docente no quiere registrar las tareas, un alumnx administrador puede registrarlas.</p>
-      <p>No requiere ningun sistema aparte, como <a href="https://moodle.org/">Moodle</a>, <a href="https://classroom.google.com/h">Google Classroom</a> o <a href="https://www.edmodo.com/">Edmodo</a>.</p>
-      <p>Pero si queres, podes integrarlo <a href="#">aquí // link no existente, leer primera parte de esto</a>.</p>
+      <div id="tareas-body">
+        <ui-view></ui-view>
+      </div>
     </main>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
+    <script src="//unpkg.com/angular-ui-router@0.3.2/release/angular-ui-router.js" charset="utf-8"></script>
+    <script src="/js/aplicacion.js" charset="utf-8"></script>
+    <script src="/controladores/tabs.controlador.js" charset="utf-8"></script>
+    <script src="/controladores/tareas.controlador.js" charset="utf-8"></script>
+    <script src="/controladores/materias.controlador.js" charset="utf-8"></script>
   </body>
 </html>

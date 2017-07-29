@@ -15,15 +15,15 @@ figlet('manejador-de-tareas', (err, data) => {
       console.dir(err);
       return;
   }
-  console.log(chalk.bgCyan.red("" + 
-    data + "\n" + 
+  console.log(chalk.bgCyan.red("" +
+    data + "\n" +
     "https://github.com/makmm/manejador-de-tareas"))
 });
 
 gulp.task('mongo', function(){
   assert = require('assert');
 
-  MongoClient.connect(process.env.mongohost, (err, connectiondb) => {
+  MongoClient.connect(process.env.mongohost || "mongodb://localhost/manejador-de-tareas", (err, connectiondb) => {
     assert.equal(null, err);
 
     db = connectiondb;
@@ -40,7 +40,7 @@ gulp.task('express', function(){
 
   app.get('/tareas.json', (req, res) => {
     var tareas = [];
-    
+
     db.collection('tareas').find(
       { /* aca abria que poner la busqueda que quiere el usuario */ }
     ).toArray()
@@ -48,11 +48,11 @@ gulp.task('express', function(){
       tareas = response;
 
       var materias = [];
-      
+
       for(var i = 0; i < tareas.length; i++) {
         materias.push(ObjectID(tareas[i].materia));
       }
-      
+
       db.collection('materias').find(
         {_id: { $in: materias }}
       ).toArray()
@@ -79,7 +79,7 @@ gulp.task('express', function(){
         return;
       }
       res.send(result);
-    });    
+    });
   });
 
   app.patch('/editarTarea', (req, res) => {

@@ -21,14 +21,15 @@ main {
       display: inline-block;
     }
     .tarea .info-tarea .tarea-subinfo {
-      
+
     }
 
   .tarea .editar-tarea {
     display: inline-block;
   }
 
+/* Fix cursor */
+.nav li,
 .dropdown {
   cursor: pointer;
 }
-
