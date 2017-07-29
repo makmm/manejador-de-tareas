@@ -16,7 +16,7 @@
         <p>{{tarea.descripcion}}</p>
         <br/>
         <p class="tarea-subinfo">
-          Materia: <strong>{{tarea.materia.nombre}}</strong>
+          Materia: <strong>{{tarea.materia.nombre || "Materia no definida // editar y arreglar, por favor"}}</strong>
         </p>
       </div>
       <div class="editar-tarea" ng-show="tareasCtrl.tareaSiendoEditada == tarea">
