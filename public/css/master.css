@@ -28,10 +28,8 @@ main {
     display: inline-block;
   }
 
+/* Fix cursor */
+.nav li,
 .dropdown {
-  cursor: pointer;
-}
-
-.nav li {
   cursor: pointer;
 }
