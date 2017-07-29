@@ -1,1 +1,37 @@
-<h1>materias.exe dejo de funcionar...</h1>
+<div id="materias">
+  <div id="toolbar">
+    <button class="btn btn-primary" ng-click="materiasCtrl.empezarNuevaMateria();">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Crear Materia
+    </button>
+    <button class="btn btn-primary" ng-click="materiasCtrl.recargarMaterias();">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+      Recargar
+    </button>
+  </div>
+  <ul class="list-group panel panel-default">
+    <li ng-repeat="materia in materiasCtrl.materias track by $index" ng-dblclick="materiasCtrl.empezarAEditarMateria(materia);" class="materia list-group-item">
+      <div class="info-materia" ng-hide="materiasCtrl.materiaSiendoEditada == materia">
+        <h4>{{materia.nombre}}</h4>
+      </div>
+      <div class="editar-materia" ng-show="materiasCtrl.materiaSiendoEditada == materia">
+        <form ng-submit="materiasCtrl.editarMateria(materia);">
+          <input ng-model="materia.nombre" placeholder="Titulo de Materia" class="edit form-control" type="edit">
+        </form>
+      </div>
+      <div class="btn-toolbar btn-group" role="group">
+        <button ng-click="materiasCtrl.toggleEdicionMateria(materia)" class="btn btn-primary btn-accion-materia" aria-label="Editar">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </button>
+        <button ng-click="materiasCtrl.eliminarMateria(materia)" class="btn btn-danger btn-accion-materia" aria-label="Eliminar">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </button>
+      </div>
+    </li>
+    <li ng-show="materiasCtrl.creando" class="materia list-group-item">
+      <form ng-submit="materiasCtrl.anadirMateria(materiasCtrl.nuevaMateria);">
+        <input ng-model="materiasCtrl.nuevaMateria.nombre" placeholder="Titulo de Materia" class="edit form-control" type="edit">
+      </form>
+    </li>
+  </ul>
+</div>

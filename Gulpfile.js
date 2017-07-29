@@ -66,12 +66,6 @@ gulp.task('express', function(){
     });
   });
 
-  app.get('/materias.json', (req, res) => {
-    db.collection('materias').find({ /* aca abria que poner la busqueda que quiere el usuario */ }).toArray((err, data) => {
-      res.send(data);
-    });
-  });
-
   app.delete('/eliminarTarea', (req, res) => {
     db.collection('tareas').remove({_id: ObjectID(req.body.id)}, (err, result) => {
       if(err){
@@ -114,6 +108,62 @@ gulp.task('express', function(){
 
           res.send(tarea.ops[0]);
         })
+      });
+    } catch(e) {
+      console.log(e);
+    }
+  });
+
+  app.get('/materias.json', (req, res) => {
+    db.collection('materias').find({ /* aca abria que poner la busqueda que quiere el usuario */ }).toArray((err, data) => {
+      res.send(data);
+    });
+  });
+
+  app.delete('/eliminarMateria', (req, res) => {
+    db.collection('materias').remove({_id: ObjectID(req.body.id)}, (err, result) => {
+      if(err){
+        res.send(err);
+        return;
+      }
+      db.collection('tareas').update(
+        {materia:
+          {_id: ObjectID(req.body.id)}
+        },
+        {
+          $unset: {materia: true}
+        }
+      );
+      res.send(result);
+    });
+  });
+
+  app.patch('/editarMateria', (req, res) => {
+    // Reemplaza {_id: "id"} por {_id: ObjectID("id")} para que no de error
+    // ya que no se puede cambiar la id
+    objeto = req.body;
+    objeto._id = ObjectID(req.body._id);
+
+    try {
+      // Reemplazar la tarea con la nueva, editada (despues voy a hacer que solo cambie lo que se cambió)
+      db.collection('materias').replaceOne({
+        _id: objeto._id
+      }, objeto);
+    } catch(e) {
+      console.log(e);
+    }
+
+    // Enviar -nada- para que el navegador no de timeout
+    res.send();
+  });
+
+  app.post('/crearMateria', (req, res) => {
+    objeto = req.body;
+    delete objeto._id;
+
+    try {
+      db.collection('materias').insert(objeto, {}, (err, materia) => {
+        res.send(materia.ops[0]);
       });
     } catch(e) {
       console.log(e);

@@ -6,25 +6,32 @@ main {
   padding-bottom: 1.5%;
 }
 
-.tarea {
+.tarea,
+.materia {
 
 }
-  .tarea .btn-toolbar {
+  .tarea .btn-toolbar,
+  .materia .btn-toolbar {
   	display: inline-block;
   	float: right;
   }
-  .tarea .info-tarea {
+  .tarea .info-tarea,
+  .materia .info-materia {
     display: inline-block;
   }
     .tarea .info-tarea h4,
-    .tarea .info-tarea p {
+    .materia .info-materia h4,
+    .tarea .info-tarea p,
+    .materia .info-materia p {
       display: inline-block;
     }
     .tarea .info-tarea .tarea-subinfo {
 
     }
 
-  .tarea .editar-tarea {
+  .tarea .editar-tarea,
+  .materia .editar-materia {
+    width: 80%;
     display: inline-block;
   }
 
