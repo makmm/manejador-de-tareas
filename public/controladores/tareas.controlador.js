@@ -2,9 +2,10 @@ app.controller('TareasController', function($http, $log, $scope){
   var tareasCtrl = this;
 
   tareasCtrl.tareas = [];
-  tareasCtrl.tab = 0;
+  tareasCtrl.creando = false;
+  tareasCtrl.tareaSiendoEditada = null;
 
-  tareasCtrl.recargarTareas = function(){
+  tareasCtrl.recargarTareas = () => {
     $http({
       method: 'GET',
       url: '/tareas.json',
