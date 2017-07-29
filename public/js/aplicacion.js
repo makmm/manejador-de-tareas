@@ -11,7 +11,7 @@ app.config(($stateProvider, $urlRouterProvider) => {
     name: "materias",
     url: "/materias",
     templateUrl: '/views/materias.view.html',
-    controller: 'MateriasController'
+    controller: 'MateriasController as materiasCtrl'
   });
   $stateProvider.state({
     name: "acercaDe",
