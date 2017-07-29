@@ -1,4 +1,4 @@
-app.controller('TareasController', ($http, $log, $scope) => {
+app.controller('TareasController', function($http, $log, $scope){
   var tareasCtrl = this;
 
   tareasCtrl.tareas = [];
@@ -13,6 +13,7 @@ app.controller('TareasController', ($http, $log, $scope) => {
         'Content-type': 'application/json;charset=utf-8'
       }
     }).then(function successCallback(response) {
+      console.log(response.data);
       tareasCtrl.tareas = response.data;
     }, function errorCallback(response) {
       /*
@@ -155,17 +156,6 @@ app.controller('TareasController', ($http, $log, $scope) => {
        */
     });
   };
-
-  tareasCtrl.tabSeleccionadaEsTareas = function(){
-    console.log($scope.tab);
-    return $scope.tab == 0;
-  };
-
-  console.log(tareasCtrl.tabSeleccionadaEsTareas());
-
-  setTimeout(function() {
-    console.log(tareasCtrl.tabSeleccionadaEsTareas());
-  }, 5000);
 
   tareasCtrl.recargarTareas();
 

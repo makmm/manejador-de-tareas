@@ -1,6 +1,11 @@
-app.controller('TabsController', ($scope) => {
+app.controller('TabsController', ($scope, $route, $routeParams, $location) => {
   var tabsCtrl = this;
 
+  $scope.$route = $route;
+  $scope.$location = $location;
+  $scope.$routeParams = $routeParams;
+
+  /*
   $scope.tab = 0;
 
   tabsCtrl.setearTab = (tab) => {
@@ -17,4 +22,5 @@ app.controller('TabsController', ($scope) => {
   };
 
   //tabsCtrl.setearTab(1);
+  */
 });
