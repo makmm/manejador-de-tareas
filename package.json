@@ -2,10 +2,10 @@
   "name": "manejador-de-tareas",
   "version": "1.0.0",
   "description": "Proyecto para que alumnos se organizen sus tareas facilmente.",
-  "main": "Gulpfile.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,6 @@
     "chalk": "^2.0.1",
     "express": "^4.15.3",
     "figlet": "^1.2.0",
-    "gulp": "^3.9.1",
     "mongodb": "^2.2.30"
   }
 }
