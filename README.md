@@ -9,6 +9,7 @@ npm i
 ```
 ...suponiendo que tenes instalado mongo y configurado para manejador-de-tareas...
 ```
+# No requerido, automaticamente va a localhost
 export mongohost="[Insertar link de mongo, ej: mongodb://localhost/manejador-de-tareas]"
 npm start
 ```
