@@ -17,7 +17,7 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 
-require('./rutas.js')(app)
+require('./rutas/index.js')(app)
 
 app.listen(puerto, () =>
   console.log("[Express] Iniciado en puerto " + puerto)
