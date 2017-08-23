@@ -137,9 +137,10 @@ app.controller('TareasController', function($http, $log, $scope){
   tareasCtrl.anadirTarea = (tarea) => {
     tareasCtrl.creando = false;
 
-    if(tarea.materia)
+    if(tarea.materia &&
+      tarea.materia._id)
       tarea.materia = tarea.materia._id;
-    else delete tarea.materia;
+
 
     $http({
       method: 'POST',
