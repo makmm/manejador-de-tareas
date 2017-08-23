@@ -5,12 +5,17 @@ module.exports = async (app) => {
   
   app.post('/crearTarea', async (req, res) => {
     try {
+      // Crear tarea
       const respuesta = await db.collection('tareas').insertOne(req.body)
+      // Conseguir la tarea recién creada
       let tarea = respuesta.ops[0]
 
-      tarea.materia = await db.collection('materias').findOne({
-        _id: ObjectID(tarea.materia)
-      })
+      // Conseguir la materia de esa tarea
+      // para devolver
+      if(tarea.materia)
+        tarea.materia = await db.collection('materias').findOne({
+          _id: ObjectID(tarea.materia)
+        })
       
       res.send(tarea)
     } catch(e){
