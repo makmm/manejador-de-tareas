@@ -1,29 +1,18 @@
-const fs = require('fs')
-const path = require('path')
-const bodyParser = require('body-parser')
-const chalk = require('chalk')
-const figlet = require('figlet')
-const morgan = require('morgan')
+//Hay que arreglar esos errores y que hay que separar las funciones de hash
 
-// -------- EXPRESS --------
+process.on('unhandledRejection', error => {
+  console.log('unhandledRejection', error)
+})
 
-const puerto = process.env.PORT || 8080;
+// -------- CONFIG --------
 
-express = require('express');
-
-var app = express();
-
-app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json());
-app.use(morgan('dev'));
-
-require('./rutas/index.js')(app)
-
-app.listen(puerto, () =>
-  console.log("[Express] Iniciado en puerto " + puerto)
-);
+let app = require('./config/express.js')()
+require('./config/passport.js')(app)
 
 // -------- ASCII --------
+
+const chalk = require('chalk')
+const figlet = require('figlet')
 
 figlet('manejador-de-tareas', (err, data) => {
   if(err){
