@@ -20,6 +20,7 @@ module.exports = async (app) => {
         await db.collection('usuarios').replaceOne({
           _id: req.user._id
         }, {
+          nombre: req.user.nombre,
           contrasena: hash.crearHash(req.body.contrasena)
         })
 
