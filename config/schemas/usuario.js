@@ -20,4 +20,8 @@ usuarioSchema.methods.compararContrasenas = function(contrasena){
   return hash.compararContrasenas(contrasena, this.contrasena)
 }
 
+usuarioSchema.query.porNombre = function(nombre){
+  return this.findOne({nombre: nombre})
+}
+
 module.exports = mongoose.model('Usuario', usuarioSchema)

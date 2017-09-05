@@ -7,9 +7,7 @@ module.exports = async (app) => {
     buscarOCrearUsuario = async () => {
       try {
         // Encontrar usuario en mongo
-        let usuario = await Usuario.findOne({
-          nombre: datosDeUsuario.nombre
-        })
+        let usuario = await Usuario.find().porNombre(datosDeUsuario.nombre)
         // si ya existe
         if(usuario){
           res.status(400).json({
