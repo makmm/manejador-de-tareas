@@ -67,17 +67,17 @@ app.controller('TareasController', function($http, $log, $scope){
        * sin contador
        */
     });
-  };
+  }
 
   tareasCtrl.empezarAEditarTarea = (tarea) => {
     tareasCtrl.tareaSiendoEditada = tarea;
-  };
+  }
 
   tareasCtrl.toggleEdicionTarea = (tarea) => {
     if(tareasCtrl.tareaSiendoEditada == tarea)
       tareasCtrl.editarTarea(tarea);
     else tareasCtrl.tareaSiendoEditada = tarea;
-  };
+  }
 
   tareasCtrl.editarTarea = (tarea) => {
     if(tarea.materia)
@@ -101,10 +101,11 @@ app.controller('TareasController', function($http, $log, $scope){
     });
 
     tareasCtrl.tareaSiendoEditada = null;
-  };
+  }
 
   tareasCtrl.cambiarMateria = (tarea, materia) => {
-    tarea.materia = materia._id;
+    tarea.materiaId = materia._id;
+    delete tarea.materia;
 
     $http({
       method: 'PATCH',
@@ -123,12 +124,12 @@ app.controller('TareasController', function($http, $log, $scope){
     });
 
     tareasCtrl.tareaSiendoEditada = null;
-  };
+  }
 
   tareasCtrl.empezarNuevaTarea = (tarea) => {
     tareasCtrl.creando = true;
     tareasCtrl.nuevaTarea = {};
-  };
+  }
 
   tareasCtrl.setearMateria = (tarea, materia) => {
     tarea.materia = materia;
@@ -137,9 +138,11 @@ app.controller('TareasController', function($http, $log, $scope){
   tareasCtrl.anadirTarea = (tarea) => {
     tareasCtrl.creando = false;
 
+    console.log(materia)
+
     if(tarea.materia &&
       tarea.materia._id)
-      tarea.materia = tarea.materia._id;
+      tarea.materiaId = tarea.materia._id;
 
 
     $http({
@@ -157,7 +160,7 @@ app.controller('TareasController', function($http, $log, $scope){
        * sin contador
        */
     });
-  };
+  }
 
   tareasCtrl.recargarTareas();
 
