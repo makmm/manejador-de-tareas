@@ -1,10 +1,6 @@
 module.exports = async (app) => {
-  const ObjectID = require('mongodb').ObjectID
-  
-  let db = await require('../../../utils/db.js')()
-
-  const hash = require('../../../utils/hash.js')
   const contrasena = require('../../../utils/contrasena.js')
+  const Usuario = require('../../../config/schemas/usuario.js')
 
   app.patch('/logeo/cuenta/contrasena',
     require('../../../utils/login.js').estaLogeado,
@@ -17,12 +13,7 @@ module.exports = async (app) => {
             problemas: contrasenaValida
           })
 
-        await db.collection('usuarios').replaceOne({
-          _id: req.user._id
-        }, {
-          nombre: req.user.nombre,
-          contrasena: hash.crearHash(req.body.contrasena)
-        })
+        await Usuario.cambiarContrasena(req.body.contrasena)
 
         req.logout()
         res.json({

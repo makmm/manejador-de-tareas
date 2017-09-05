@@ -1,7 +1,5 @@
 module.exports = async (app) => {
-  let db = await require('../../../utils/db.js')()
-
-  const hash = require('../../../utils/hash.js')
+  const Usuario = require('../../../config/schemas/usuario.js')
 
   app.post('/logeo/cuenta', async (req, res) => {
     const datosDeUsuario = req.body
@@ -9,7 +7,7 @@ module.exports = async (app) => {
     buscarOCrearUsuario = async () => {
       try {
         // Encontrar usuario en mongo
-        let usuario = await db.collection('usuarios').findOne({
+        let usuario = await Usuario.findOne({
           nombre: datosDeUsuario.nombre
         })
         // si ya existe
@@ -20,10 +18,12 @@ module.exports = async (app) => {
         } else {
           // Si NO hay un usuario igual
           // Crear cuenta
-          await db.collection('usuarios').insertOne({
-            nombre: datosDeUsuario.nombre,
-            contrasena: hash.crearHash(datosDeUsuario.contrasena)
-          })
+          let nuevoUsuario = Usuario()
+
+          nuevoUsuario.nombre = datosDeUsuario.nombre
+          nuevoUsuario.cambiarContrasena(datosDeUsuario.contrasena)
+
+          await nuevoUsuario.save()
 
           res.status(200).json({
             status: "Usuario creado."

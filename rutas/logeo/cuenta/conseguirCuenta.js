@@ -1,6 +1,4 @@
 module.exports = async (app) => {
-  let db = await require('../../../utils/db.js')()
-  
   const passport = require('passport')
   const ObjectID = require('mongodb').ObjectID
 

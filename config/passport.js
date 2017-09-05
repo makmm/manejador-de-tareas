@@ -1,12 +1,8 @@
 module.exports = async (app) => {
-  let db = await require('../utils/db.js')()
-
-  const ObjectID = require('mongodb').ObjectID
+  const Usuario = require('./schemas/usuario.js')
 
   const passport = require('passport')
   const LocalStrategy = require('passport-local').Strategy
-
-  const hash = require('../utils/hash.js')
 
   passport.serializeUser((user, done) => {
     done(null, user._id);
@@ -14,9 +10,7 @@ module.exports = async (app) => {
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const usuario = await db.collection('usuarios').findOne({
-        _id: ObjectID(id)
-      })
+      const usuario = await Usuario.findById(id)
       done(null, usuario)
     } catch(e){
       done(e)
@@ -30,7 +24,7 @@ module.exports = async (app) => {
   }, 
   async (req, nombre, contrasena, done) => {
     try {
-      let usuario = await db.collection('usuarios').findOne({
+      let usuario = await Usuario.findOne({
         nombre: nombre
       })
 
@@ -39,7 +33,7 @@ module.exports = async (app) => {
           error: "El usuario o la contraseña es incorrecta."
         })
 
-      if(!hash.compararContrasenas(contrasena, usuario.contrasena))
+      if(!usuario.compararContrasenas(contrasena))
         return done(null, false, {
           error: "El usuario o la contraseña es incorrecta."
         })
