@@ -1,11 +1,9 @@
 module.exports = async (app) => {
-  const ObjectID = require('mongodb').ObjectID
-  
-  let db = await require('../../utils/db.js')()
-  
+  const Materia = require('../../config/schemas/materia.js')
+
   app.get('/materias.json', async (req, res) => {
     try {
-      const materias = await db.collection('materias').find().toArray()
+      const materias = await Materia.find()
       res.send(materias)
     } catch(e){
       throw e

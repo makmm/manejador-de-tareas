@@ -1,25 +1,14 @@
 module.exports = async (app) => {
-  const ObjectID = require('mongodb').ObjectID
-  
-  let db = await require('../../utils/db.js')()
+  const Materia = require('../../config/schemas/materia.js')
+  const Tarea = require('../../config/schemas/tarea.js')
 
   app.delete('/eliminarMateria', async (req, res) => {
     try {
-      const materias = await db.collection('materias').remove({
-        _id: ObjectID(req.body.id)
+      const materias = await Materia.remove({
+        _id: req.body.id
       })
 
-      await db.collection('tareas').update({
-        // Si alguna tarea tiene la materia eliminada...
-        materia: {
-          _id: ObjectID(req.body.id)
-        }
-      }, {
-        // ...'unsetear' la materia (poner como undefined)
-        $unset: {
-          materia: true
-        }
-      })
+      // TODO: Eliminar la ID de la materia aquí
 
       res.send()
     } catch(e){

@@ -1,23 +1,20 @@
 module.exports = async (app) => {
-  const ObjectID = require('mongodb').ObjectID
-  
-  let db = await require('../../utils/db.js')()
-  
+  const Tarea = require('../../config/schemas/tarea.js')
+
   app.post('/crearTarea', async (req, res) => {
     try {
-      // Crear tarea
-      const respuesta = await db.collection('tareas').insertOne(req.body)
-      // Conseguir la tarea recién creada
-      let tarea = respuesta.ops[0]
+      let nuevaTarea = Tarea(req.body)
+      console.log(nuevaTarea)
 
-      // Conseguir la materia de esa tarea
-      // para devolver
-      if(tarea.materia)
-        tarea.materia = await db.collection('materias').findOne({
-          _id: ObjectID(tarea.materia)
-        })
-      
-      res.send(tarea)
+      await nuevaTarea.save()
+
+      // Conseguir la materia de esa tarea para devolver
+      nuevaTarea = nuevaTarea.toObject({
+        virtuals: true
+      })
+      nuevaTarea.materia = await nuevaTarea.materia
+
+      res.send(nuevaTarea)
     } catch(e){
       throw e
     }

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const ObjectId = require('mongodb').ObjectID
+
+mongoose.Promise = global.Promise
 
 const Materia = require('./materia.js')
 
@@ -10,10 +11,11 @@ let tareaSchema = mongoose.Schema({
 })
 
 tareaSchema.virtual('materia').get(async function(){
-  const materia = await Materia.findById(this.materiaId)
-  console.log("Materia encontrada: " + materia)
-  return materia
+  return await Materia.findById(this.materiaId)
 })
 
+tareaSchema.query.porMateria = function(materia){
+  return this.findOne({materia: materia})
+}
 
 module.exports = mongoose.model('Tarea', tareaSchema)

@@ -1,14 +1,17 @@
 module.exports = async (app) => {
-  let db = await require('../../utils/db.js')()
-  
+  const Materia = require('../../config/schemas/materia.js')
+
   app.post('/crearMateria', async (req, res) => {
     try {
-     const respuesta = await db.collection('materias').insert(req.body)
-     const materia = respuesta.ops[0]
+      let nuevaMateria = Materia()
 
-     res.send(materia)
-   } catch(e){
-     throw e
-   }
- })
+      nuevaMateria.nombre = req.body.nombre
+
+      await nuevaMateria.save()
+
+      res.send(nuevaMateria)
+    } catch(e){
+       throw e
+    }
+   })
 }

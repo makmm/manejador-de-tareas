@@ -3,15 +3,16 @@ module.exports = async (app) => {
 
   app.get('/tareas.json', async (req, res) => {
     try {
-      console.log("tareas: " + await Tarea.find())
       let tareas = await Tarea.find()
 
       for(var i = 0; i < tareas.length; i++){
-        let tarea = tareas[i]
-        tarea = tarea.toObject({
+        // Sinceramente, no se por que esto es necesario.
+        // pero me di cuenta de que materia era un Promise
+        // Y funciona, así que ¯\_(ツ)_/¯
+        tareas[i] = tareas[i].toObject({
           virtuals: true
         })
-        console.log(tarea)
+        tareas[i].materia = await tareas[i].materia
       }
 
       res.send(tareas)

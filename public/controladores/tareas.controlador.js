@@ -80,9 +80,13 @@ app.controller('TareasController', function($http, $log, $scope){
   }
 
   tareasCtrl.editarTarea = (tarea) => {
-    if(tarea.materia)
-      tarea.materia = tarea.materia._id;
-    else tarea.materia = tareasCtrl.materias[0]._id;
+    // if(tarea.materia)
+    //   tarea.materia = tarea.materia._id;
+    // else tarea.materia = tareasCtrl.materias[0]._id;
+    if(tarea.materia){
+      tarea.materiaId = tarea.materia._id
+      delete tarea.materia
+    }
 
     $http({
       method: 'PATCH',
@@ -92,7 +96,7 @@ app.controller('TareasController', function($http, $log, $scope){
         'Content-type': 'application/json;charset=utf-8'
       }
     }).then(function successCallback(response) {
-      tarea.materia = tareasCtrl.materias.find(m => m._id.equals(ObjectID(tarea.materia)));
+      tarea.materia = tareasCtrl.materias.find(m => m._id == tarea.materiaId);
     }, function errorCallback(response) {
       /*
        * Boton de reintentar,
@@ -138,7 +142,7 @@ app.controller('TareasController', function($http, $log, $scope){
   tareasCtrl.anadirTarea = (tarea) => {
     tareasCtrl.creando = false;
 
-    console.log(materia)
+    console.log(tarea.materia)
 
     if(tarea.materia &&
       tarea.materia._id)
