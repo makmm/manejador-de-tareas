@@ -1,16 +1,16 @@
 <div id="tareas">
   <div id="toolbar">
-    <button class="btn btn-primary" ng-click="tareasCtrl.empezarNuevaTarea();">
+    <button class="btn btn-primary" ng-click="tareasCtrl.empezarNuevaTarea()">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       Crear Tarea
     </button>
-    <button class="btn btn-primary" ng-click="tareasCtrl.recargarTareas();">
+    <button class="btn btn-primary" ng-click="tareasCtrl.recargarTareas()">
       <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
       Recargar
     </button>
   </div>
   <ul class="list-group panel panel-default">
-    <li ng-repeat="tarea in tareasCtrl.tareas track by $index" ng-dblclick="tareasCtrl.empezarAEditarTarea(tarea);" class="tarea list-group-item">
+    <li ng-repeat="tarea in tareasCtrl.tareas track by $index" ng-dblclick="tareasCtrl.empezarAEditarTarea(tarea)" class="tarea list-group-item">
       <div class="info-tarea" ng-hide="tareasCtrl.tareaSiendoEditada == tarea">
         <h4>{{tarea.nombre}}</h4>
         <p>{{tarea.descripcion}}</p>
@@ -20,10 +20,10 @@
         </p>
       </div>
       <div class="editar-tarea" ng-show="tareasCtrl.tareaSiendoEditada == tarea">
-        <form ng-submit="tareasCtrl.editarTarea(tarea);">
+        <form ng-submit="tareasCtrl.editarTarea(tarea)">
           <input ng-model="tarea.nombre" placeholder="Titulo de tarea" class="edit form-control" type="edit">
         </form>
-        <form ng-submit="tareasCtrl.editarTarea(tarea);">
+        <form ng-submit="tareasCtrl.editarTarea(tarea)">
           <input ng-model="tarea.descripcion" placeholder="Descripción de tarea" class="edit form-control" type="edit">
         </form>
         <div class="dropdown">
@@ -48,10 +48,10 @@
       </div>
     </li>
     <li ng-show="tareasCtrl.creando" class="tarea list-group-item">
-      <form ng-submit="tareasCtrl.anadirTarea(tareasCtrl.nuevaTarea);">
+      <form ng-submit="tareasCtrl.anadirTarea(tareasCtrl.nuevaTarea)">
         <input ng-model="tareasCtrl.nuevaTarea.nombre" placeholder="Titulo de tarea" class="edit form-control" type="edit">
       </form>
-      <form ng-submit="tareasCtrl.anadirTarea(tareasCtrl.nuevaTarea);">
+      <form ng-submit="tareasCtrl.anadirTarea(tareasCtrl.nuevaTarea)">
         <input ng-model="tareasCtrl.nuevaTarea.descripcion" placeholder="Descripción de tarea" class="edit form-control" type="edit">
       </form>
       <div class="dropdown">
@@ -61,7 +61,7 @@
         </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
           <li ng-repeat="materia in tareasCtrl.materias">
-            <a ng-click="tareasCtrl.setearMateria(tareasCtrl.nuevaTarea, materia);">{{materia.nombre}}</a>
+            <a ng-click="tareasCtrl.setearMateria(tareasCtrl.nuevaTarea, materia)">{{materia.nombre}}</a>
           </li>
         </ul>
       </div>

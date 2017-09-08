@@ -3,9 +3,10 @@ module.exports = async (app) => {
 
   app.delete('/eliminarTarea', async (req, res) => {
     try {
-      await Tarea.find().remove({
-        _id: req.body.id
+      await Tarea.remove({
+        _id: req.body._id
       })
+
       res.send()
     } catch(e){
       throw e

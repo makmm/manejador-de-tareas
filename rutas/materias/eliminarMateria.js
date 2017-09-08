@@ -4,8 +4,8 @@ module.exports = async (app) => {
 
   app.delete('/eliminarMateria', async (req, res) => {
     try {
-      const materias = await Materia.remove({
-        _id: req.body.id
+      await Materia.remove({
+        _id: req.body._id
       })
 
       // TODO: Eliminar la ID de la materia en las tareas aquí

@@ -6,17 +6,17 @@ app.config(($stateProvider, $urlRouterProvider) => {
     url: "/tareas",
     templateUrl: '/views/tareas.view.html',
     controller: 'TareasController as tareasCtrl'
-  });
+  })
   $stateProvider.state({
     name: "materias",
     url: "/materias",
     templateUrl: '/views/materias.view.html',
     controller: 'MateriasController as materiasCtrl'
-  });
+  })
   $stateProvider.state({
     name: "acercaDe",
     url: "/acercaDe",
     templateUrl: '/views/acercaDe.view.html'
-  });
+  })
   $urlRouterProvider.otherwise("/acercaDe")
-});
+})

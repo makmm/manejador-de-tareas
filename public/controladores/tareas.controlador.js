@@ -1,171 +1,141 @@
-app.controller('TareasController', function($http, $log, $scope){
-  var tareasCtrl = this;
+app.controller('TareasController', function($http, $scope){
+  var tareasCtrl = this
 
-  tareasCtrl.tareas = [];
-  tareasCtrl.creando = false;
-  tareasCtrl.tareaSiendoEditada = null;
+  tareasCtrl.tareas = []
+  tareasCtrl.creando = false
+  tareasCtrl.tareaSiendoEditada = null
 
   tareasCtrl.recargarTareas = () => {
-    $http({
-      method: 'GET',
-      url: '/tareas.json',
-      data: {},
+    $http.get('/tareas.json', {
       headers: {
         'Content-type': 'application/json;charset=utf-8'
       }
-    }).then(function successCallback(response) {
-      console.log(response.data);
-      tareasCtrl.tareas = response.data;
-    }, function errorCallback(response) {
-      /*
-       * Hacer que aparece una alerta de
-       * esas que te da bootstrap, con
-       * un contador de 30seg de que va a
-       * auto-reintentar, y un botón para
-       * reintentar manualmente.
-       */
-    });
+    })
+      .then(function successCallback(respuesta) {
+        tareasCtrl.tareas = respuesta.data
+      }, function errorCallback(respuesta) {
+        /*
+         * Hacer que aparece una alerta de
+         * esas que te da bootstrap, con
+         * un contador de 30seg de que va a
+         * auto-reintentar, y un botón para
+         * reintentar manualmente.
+         */
+      })
 
-    $http({
-      method: 'GET',
-      url: '/materias.json',
-      data: {},
+    $http.get('/materias.json', {
       headers: {
         'Content-type': 'application/json;charset=utf-8'
       }
-    }).then(function successCallback(response) {
-      tareasCtrl.materias = response.data;
-    }, function errorCallback(response) {
-      /*
-       * Hacer que aparece una alerta de
-       * esas que te da bootstrap, con
-       * un contador de 30seg de que va a
-       * auto-reintentar, y un botón para
-       * reintentar manualmente.
-       */
-    });
+    })
+      .then(function successCallback(respuesta) {
+        tareasCtrl.materias = respuesta.data
+      }, function errorCallback(respuesta) {
+        /*
+         * Hacer que aparece una alerta de
+         * esas que te da bootstrap, con
+         * un contador de 30seg de que va a
+         * auto-reintentar, y un botón para
+         * reintentar manualmente.
+         */
+      })
   }
 
-  tareasCtrl.eliminarTarea = (tarea) => {
-    for(var i = tareasCtrl.tareas.length - 1; i >= 0; i--) {
-      if(tareasCtrl.tareas[i] == tarea){
-        tareasCtrl.tareas.splice(i, 1);
-      }
-    }
-
-    $http({
-      method: 'DELETE',
-      url: '/eliminarTarea',
-      data: {id: tarea._id},
+  tareasCtrl.eliminarTarea = (tareaAEliminar) =>
+    $http.delete('/eliminarTarea', {
+      data: {_id: tareaAEliminar._id},
       headers: {
         'Content-type': 'application/json;charset=utf-8'
       }
-    }).then(function successCallback(response) {
-    }, function errorCallback(response) {
-      /*
-       * Boton de reintentar,
-       * sin contador
-       */
-    });
-  }
+    })
+      .then(function successCallback(respuesta) {
+        tareasCtrl.tareas.splice(
+          tareasCtrl.tareas.findIndex((tarea) => tarea == tareaAEliminar), 1
+        )
+      }, function errorCallback(respuesta) {
+        /*
+         * Boton de reintentar,
+         * sin contador
+         */
+      })
 
-  tareasCtrl.empezarAEditarTarea = (tarea) => {
-    tareasCtrl.tareaSiendoEditada = tarea;
-  }
+  tareasCtrl.empezarAEditarTarea = (tarea) =>
+    tareasCtrl.tareaSiendoEditada = tarea
 
   tareasCtrl.toggleEdicionTarea = (tarea) => {
     if(tareasCtrl.tareaSiendoEditada == tarea)
-      tareasCtrl.editarTarea(tarea);
-    else tareasCtrl.tareaSiendoEditada = tarea;
+      tareasCtrl.editarTarea(tarea)
+    else
+      tareasCtrl.empezarAEditarTarea(tarea)
   }
 
+  tareasCtrl.terminarDeEditarTarea = () =>
+    tareasCtrl.tareaSiendoEditada = null
+
   tareasCtrl.editarTarea = (tarea) => {
-    // if(tarea.materia)
-    //   tarea.materia = tarea.materia._id;
-    // else tarea.materia = tareasCtrl.materias[0]._id;
     if(tarea.materia){
       tarea.materiaId = tarea.materia._id
       delete tarea.materia
     }
 
-    $http({
-      method: 'PATCH',
-      url: '/editarTarea',
-      data: tarea,
-      headers: {
-        'Content-type': 'application/json;charset=utf-8'
-      }
-    }).then(function successCallback(response) {
-      tarea.materia = tareasCtrl.materias.find(m => m._id == tarea.materiaId);
-    }, function errorCallback(response) {
-      /*
-       * Boton de reintentar,
-       * sin contador
-       */
-    });
-
-    tareasCtrl.tareaSiendoEditada = null;
+    $http.patch('/editarTarea', tarea)
+      .then(function successCallback(respuesta) {
+        tarea.materia = tareasCtrl.materias.find(m => m._id == tarea.materiaId)
+        tareasCtrl.terminarDeEditarTarea()
+      }, function errorCallback(respuesta) {
+        /*
+         * Boton de reintentar,
+         * sin contador
+         */
+      })
   }
 
   tareasCtrl.cambiarMateria = (tarea, materia) => {
-    tarea.materiaId = materia._id;
-    delete tarea.materia;
+    tarea.materiaId = materia._id
+    delete tarea.materia
 
-    $http({
-      method: 'PATCH',
-      url: '/editarTarea',
-      data: tarea,
-      headers: {
-        'Content-type': 'application/json;charset=utf-8'
-      }
-    }).then(function successCallback(response) {
-      tarea.materia = materia;
-    }, function errorCallback(response) {
-      /*
-       * Boton de reintentar,
-       * sin contador
-       */
-    });
-
-    tareasCtrl.tareaSiendoEditada = null;
+    $http.patch('/editarTarea', tarea)
+      .then(function successCallback(respuesta) {
+        tarea.materia = materia
+        tareasCtrl.terminarDeEditarTarea()
+      }, function errorCallback(respuesta) {
+        /*
+         * Boton de reintentar,
+         * sin contador
+         */
+      })
   }
 
-  tareasCtrl.empezarNuevaTarea = (tarea) => {
-    tareasCtrl.creando = true;
-    tareasCtrl.nuevaTarea = {};
-  }
+  tareasCtrl.empezarNuevaTarea = (tarea) =>
+    tareasCtrl.creando = true
 
   tareasCtrl.setearMateria = (tarea, materia) => {
     tarea.materia = materia;
   }
 
-  tareasCtrl.anadirTarea = (tarea) => {
-    tareasCtrl.creando = false;
-
-    console.log(tarea.materia)
-
-    if(tarea.materia &&
-      tarea.materia._id)
-      tarea.materiaId = tarea.materia._id;
-
-
-    $http({
-      method: 'POST',
-      url: '/crearTarea',
-      data: tarea,
-      headers: {
-        'Content-type': 'application/json;charset=utf-8'
-      }
-    }).then(function successCallback(response) {
-      tareasCtrl.tareas.push(response.data);
-    }, function errorCallback(response) {
-      /*
-       * Boton de reintentar,
-       * sin contador
-       */
-    });
+  tareasCtrl.terminarDeCrearTarea = () => {
+    tareasCtrl.creando = false
+    tareasCtrl.nuevaTarea = {}
   }
 
-  tareasCtrl.recargarTareas();
+  tareasCtrl.anadirTarea = (tarea) => {
+    if(tarea.materia &&
+      tarea.materia._id){
+      tarea.materiaId = tarea.materia._id
+      delete tarea.materia
+    }
 
-});
+    $http.post('/crearTarea', tarea)
+      .then(function successCallback(respuesta) {
+        tareasCtrl.tareas.push(respuesta.data)
+        tareasCtrl.terminarDeCrearTarea()
+      }, function errorCallback(respuesta) {
+        /*
+         * Boton de reintentar,
+         * sin contador
+         */
+      })
+  }
+
+  tareasCtrl.recargarTareas()
+})
