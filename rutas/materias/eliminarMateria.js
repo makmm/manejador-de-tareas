@@ -8,7 +8,7 @@ module.exports = async (app) => {
         _id: req.body.id
       })
 
-      // TODO: Eliminar la ID de la materia aquí
+      // TODO: Eliminar la ID de la materia en las tareas aquí
 
       res.send()
     } catch(e){
