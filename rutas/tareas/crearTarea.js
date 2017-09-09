@@ -4,7 +4,6 @@ module.exports = async (app) => {
   app.post('/crearTarea', async (req, res) => {
     try {
       let nuevaTarea = Tarea(req.body)
-      console.log(nuevaTarea)
 
       await nuevaTarea.save()
 
