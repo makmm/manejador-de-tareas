@@ -7,18 +7,22 @@ module.exports = async (app) => {
     buscarOCrearUsuario = async () => {
       try {
         // Encontrar usuario en mongo
-        let usuario = await Usuario.find().porNombre(datosDeUsuario.nombre)
+        let usuarioPorUsuario = await Usuario.find().porUsuario(datosDeUsuario.usuario)
+        let usuarioPorEmail = await Usuario.find().porEmail(datosDeUsuario.email)
         // si ya existe
-        if(usuario){
+        if(usuarioPorUsuario){
           res.status(400).json({
             error: "Usuario ya existe."
+          })
+        } else if(usuarioPorEmail){
+          res.status(400).json({
+            error: "Email ya usado."
           })
         } else {
           // Si NO hay un usuario igual
           // Crear cuenta
-          let nuevoUsuario = Usuario()
+          let nuevoUsuario = Usuario(datosDeUsuario)
 
-          nuevoUsuario.nombre = datosDeUsuario.nombre
           nuevoUsuario.cambiarContrasena(datosDeUsuario.contrasena)
 
           await nuevoUsuario.save()

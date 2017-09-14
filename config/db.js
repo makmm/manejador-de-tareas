@@ -1,7 +1,7 @@
 module.exports = () => {
   const mongoose = require('mongoose')
 
-  const url = process.env.mongohost || "mongodb://localhost/manejador-de-tareas"
+  const url = require('../config.js').mongo_host || "mongodb://localhost/manejador-de-tareas"
 
   mongoose.Promise = global.Promise
 

@@ -16,7 +16,7 @@ module.exports = () => {
   app.use(morgan('dev'))
 
   app.use(expressSession({
-    secret: 'mySecretKey',
+    secret: require('../config.js').secret_key,
     resave: true,
     saveUninitialized: true
   }))

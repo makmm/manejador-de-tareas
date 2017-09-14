@@ -1,6 +1,6 @@
 module.exports = async (app) => {
   const ObjectID = require('mongodb').ObjectID
-  
+
   let db = await require('../../../utils/db.js')()
 
   app.patch('/logeo/cuenta',
@@ -10,7 +10,10 @@ module.exports = async (app) => {
         await db.collection('usuarios').replaceOne({
           _id: req.user._id
         }, {
-          nombre: req.body.nombre
+          nombre: req.user.nombre,
+          apellido: req.user.apellido,
+          usuario: req.user.usuario,
+          email: req.user.email
         })
 
         res.json({

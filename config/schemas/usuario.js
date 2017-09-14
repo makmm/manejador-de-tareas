@@ -4,6 +4,9 @@ mongoose.Promise = global.Promise
 
 let usuarioSchema = mongoose.Schema({
   nombre: String,
+  apellido: String,
+  usuario: String,
+  email: String,
   contrasena: String
 })
 
@@ -22,8 +25,12 @@ usuarioSchema.methods.compararContrasenas = function(contrasena){
   return hash.compararContrasenas(contrasena, this.contrasena)
 }
 
-usuarioSchema.query.porNombre = function(nombre){
-  return this.findOne({nombre: nombre})
+usuarioSchema.query.porUsuario = function(usuario){
+  return this.findOne({usuario: usuario})
+}
+
+usuarioSchema.query.porEmail = function(email){
+  return this.findOne({email: email})
 }
 
 module.exports = mongoose.model('Usuario', usuarioSchema)

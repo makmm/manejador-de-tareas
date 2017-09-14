@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/master.css">
   </head>
   <body>
-    <nav class="navbar">
+    <nav ng-controller="NavbarController as navbarCtrl" class="navbar">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -39,7 +39,17 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Iniciar Sesión</a></li>
+            <li ng-hide="navbarCtrl.estaLogeado()" ui-sref="login" ui-sref-active="active">
+              <a>Iniciar Sesión</a>
+            </li>
+            <li ng-show="navbarCtrl.estaLogeado()" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido, {{navbarCtrl.conseguirPerfil().usuario}}! <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a ui-sref="perfil">Perfil</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a ng-click="navbarCtrl.eliminarSesion()">Cerrar Sesión</a></li>
+              </ul>
+            </li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
@@ -52,8 +62,12 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
     <script src="//unpkg.com/angular-ui-router@0.3.2/release/angular-ui-router.js" charset="utf-8"></script>
     <script src="/js/aplicacion.js" charset="utf-8"></script>
+    <script src="/servicios/perfil.servicio.js" charset="utf-8"></script>
+    <script src="/servicios/login.servicio.js" charset="utf-8"></script>
     <script src="/controladores/tabs.controlador.js" charset="utf-8"></script>
     <script src="/controladores/tareas.controlador.js" charset="utf-8"></script>
     <script src="/controladores/materias.controlador.js" charset="utf-8"></script>
+    <script src="/controladores/login.controlador.js" charset="utf-8"></script>
+    <script src="/controladores/navbar.controlador.js" charset="utf-8"></script>
   </body>
 </html>

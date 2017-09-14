@@ -1,0 +1,25 @@
+<div class="container">
+  <form ng-submit="loginCtrl.login(loginCtrl.usuarioSiendoLogeado)" class="form-login">
+    <h2>Iniciar Sesión</h2>
+    <div ng-show="loginCtrl.mostrarAlerta" class="alert" ng-class="{'alert-danger': loginCtrl.tipoDeAlerta == 'danger'}" role="alert">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
+      {{loginCtrl.alerta}}
+    </div>
+    <p>{{cuenta}}</p>
+    <p>{{logeado}}</p>
+    test
+    <div class="form-group">
+      <input ng-model="loginCtrl.usuarioSiendoLogeado.usuario" type="text" class="form-control input-lg" placeholder="Usuario">
+      <input ng-model="loginCtrl.usuarioSiendoLogeado.contrasena" type="password" class="form-control input-lg" placeholder="Contraseña">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-lg btn-block">
+        Iniciar Sesión
+      </button>
+      <p>
+        ¿No tenes una cuenta? <a ui-sref="registrar">Registrar</a>
+      </p>
+    </div>
+  </form>
+</div>

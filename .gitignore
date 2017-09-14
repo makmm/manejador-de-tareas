@@ -59,3 +59,6 @@ typings/
 
 # heroku
 app.json
+
+# Cosas del proyecto
+config.json

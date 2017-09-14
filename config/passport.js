@@ -18,14 +18,14 @@ module.exports = async (app) => {
   })
 
   passport.use('local', new LocalStrategy({
-    usernameField: 'nombre',
+    usernameField: 'usuario',
     passwordField: 'contrasena',
     passReqToCallback: true
-  }, 
-  async (req, nombre, contrasena, done) => {
+  },
+  async (req, nombreDeUsuario, contrasena, done) => {
     try {
       let usuario = await Usuario.findOne({
-        nombre: nombre
+        usuario: nombreDeUsuario
       })
 
       if(!usuario)
@@ -37,7 +37,7 @@ module.exports = async (app) => {
         return done(null, false, {
           error: "El usuario o la contraseña es incorrecta."
         })
-      
+
       return done(null, usuario)
     } catch(e){
       return done(e)

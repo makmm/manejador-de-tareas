@@ -1,4 +1,4 @@
-var app = angular.module('manejador-de-tareas', ['ui.router']);
+var app = angular.module('manejador-de-tareas', ['ui.router'])
 
 app.config(($stateProvider, $urlRouterProvider) => {
   $stateProvider.state({
@@ -6,17 +6,24 @@ app.config(($stateProvider, $urlRouterProvider) => {
     url: "/tareas",
     templateUrl: '/views/tareas.view.html',
     controller: 'TareasController as tareasCtrl'
-  })
-  $stateProvider.state({
+  }).state({
     name: "materias",
     url: "/materias",
     templateUrl: '/views/materias.view.html',
     controller: 'MateriasController as materiasCtrl'
-  })
-  $stateProvider.state({
+  }).state({
     name: "acercaDe",
     url: "/acercaDe",
     templateUrl: '/views/acercaDe.view.html'
+  }).state({
+    name: "login",
+    url: "/login",
+    templateUrl: '/views/login.view.html',
+    controller: 'LoginController as loginCtrl'
+  }).state({
+    name: "registrar",
+    url: "/registrar",
+    templateUrl: '/views/registrar.view.html'
   })
   $urlRouterProvider.otherwise("/acercaDe")
 })

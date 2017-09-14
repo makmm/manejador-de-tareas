@@ -40,3 +40,29 @@ main {
 .dropdown {
   cursor: pointer;
 }
+
+.form-login {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+  .form-login input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .form-login input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+
+.form-registrar {
+  max-width: 500px;
+  padding: 15px;
+  margin: 0 auto;
+}
+  .form-registrar .form-group input {
+    margin-top: 7px;
+  }
