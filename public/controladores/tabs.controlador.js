@@ -1,9 +1,9 @@
 app.controller('TabsController', ($scope, $route, $routeParams, $location) => {
-  var tabsCtrl = this;
+  var tabsCtrl = this
 
-  $scope.$route = $route;
-  $scope.$location = $location;
-  $scope.$routeParams = $routeParams;
+  $scope.$route = $route
+  $scope.$location = $location
+  $scope.$routeParams = $routeParams
 
   /*
   $scope.tab = 0;
@@ -23,4 +23,4 @@ app.controller('TabsController', ($scope, $route, $routeParams, $location) => {
 
   //tabsCtrl.setearTab(1);
   */
-});
+})

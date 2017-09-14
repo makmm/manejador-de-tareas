@@ -1,5 +1,5 @@
 app.controller('MateriasController', function($http){
-  var materiasCtrl = this;
+  var materiasCtrl = this
 
   materiasCtrl.materias = []
   materiasCtrl.creando = false
