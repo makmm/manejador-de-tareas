@@ -34,6 +34,9 @@ app.service('loginServicio', function($http, perfilServicio){
         loginServicio.logeado = false
       })
 
+  loginServicio.crearCuenta = (cuenta) =>
+    $http.post('/logeo/cuenta', cuenta)
+
   angular.element(document).ready(() => {
     loginServicio.recargarSesion()
   })

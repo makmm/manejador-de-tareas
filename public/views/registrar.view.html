@@ -1,0 +1,34 @@
+<div class="container">
+  <form class="form-registrar">
+    <h2>Registrar</h2>
+    <div class="form-group">
+      <input ng-model="registrarCtrl.usuarioSiendoRegistrado.nombre" type="text" class="form-control input-lg" placeholder="Nombre">
+      <div ng-messages="registrarCtrl.usuarioSiendoRegistrado.nombre.$error" ng-messages-include="mensajes.html"></div>
+    </div>
+    <div class="form-group">
+      <input ng-model="registrarCtrl.usuarioSiendoRegistrado.apellido" type="text" class="form-control input-lg" placeholder="Apellido">
+      <div ng-messages="registrarCtrl.usuarioSiendoRegistrado.apellido.$error" ng-messages-include="mensajes.html"></div>
+    </div>
+    <div class="form-group">
+      <input ng-model="registrarCtrl.usuarioSiendoRegistrado.usuario" type="text" class="form-control input-lg" placeholder="Usuario*" required>
+      <div ng-messages="registrarCtrl.usuarioSiendoRegistrado.usuario.$error" ng-messages-include="mensajes.html"></div>
+    </div>
+    <div class="form-group">
+      <input ng-model="registrarCtrl.usuarioSiendoRegistrado.email" type="text" class="form-control input-lg" placeholder="Email*" required>
+      <div ng-messages="registrarCtrl.usuarioSiendoRegistrado.email.$error" ng-messages-include="mensajes.html"></div>
+    </div>
+    <div class="form-group">
+      <input ng-model="registrarCtrl.usuarioSiendoRegistrado.contrasena" type="password" class="form-control input-lg" placeholder="Contraseña*" required>
+      <div ng-messages="registrarCtrl.usuarioSiendoRegistrado.contrasena.$error" ng-messages-include="mensajes.html"></div>
+    </div>
+    <div class="form-group">
+      <input ng-model="registrarCtrl.usuarioSiendoRegistrado.verificarContrasena" type="password" class="form-control input-lg" placeholder="Repetir contraseña*" required>
+      <div ng-messages="registrarCtrl.usuarioSiendoRegistrado.verificarContrasena.$error" ng-messages-include="mensajes.html"></div>
+    </div>
+    <p><small>* = Requerido</small></p>
+    <div class="form-group">
+      <button ng-click="registrarCtrl.registrar()" class="btn btn-primary btn-lg btn-block">Registrar</button>
+      <p>¿Ya tenes una cuenta? <a ui-sref="login">Iniciar Sesión</a></p>
+    </div>
+  </form>
+</div>

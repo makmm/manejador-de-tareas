@@ -2,6 +2,12 @@ main {
   margin: 0 2%;
 }
 
+input.ng-invalid {
+  border-color: #dc322f !important;
+}
+
+/* Tareas/Materias */
+
 #toolbar {
   padding-bottom: 1.5%;
 }
@@ -41,6 +47,8 @@ main {
   cursor: pointer;
 }
 
+/* Login */
+
 .form-login {
   max-width: 330px;
   padding: 15px;
@@ -48,8 +56,8 @@ main {
 }
   .form-login input[type="text"] {
     margin-bottom: -1px;
-    border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
   .form-login input[type="password"] {
     margin-bottom: 10px;
@@ -57,6 +65,7 @@ main {
     border-top-right-radius: 0;
   }
 
+/* Registrar */
 
 .form-registrar {
   max-width: 500px;
@@ -66,3 +75,25 @@ main {
   .form-registrar .form-group input {
     margin-top: 7px;
   }
+
+/* Perfil */
+
+#perfil-nav {
+  margin-bottom: 20px;
+}
+
+.form-perfil {
+
+}
+  .form-perfil .form-perfil-nombre-completo {
+
+  }
+    .form-perfil .form-perfil-nombre-completo input:first-of-type {
+      margin-bottom: -1px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .form-perfil .form-perfil-nombre-completo input:last-of-type {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }

@@ -6,6 +6,7 @@ module.exports = async (app) => {
     require('../../../utils/login.js').estaLogeado,
     async (req, res) => {
       res.json({
+        _id: req.user._id,
         nombre: req.user.nombre,
         apellido: req.user.apellido,
         usuario: req.user.usuario,

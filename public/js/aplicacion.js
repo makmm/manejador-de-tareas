@@ -23,7 +23,13 @@ app.config(($stateProvider, $urlRouterProvider) => {
   }).state({
     name: "registrar",
     url: "/registrar",
-    templateUrl: '/views/registrar.view.html'
+    templateUrl: '/views/registrar.view.html',
+    controller: 'RegistrarController as registrarCtrl'
+  }).state({
+    name: "perfil",
+    url: "/perfil",
+    templateUrl: '/views/perfil.view.html',
+    controller: 'PerfilController as perfilCtrl'
   })
   $urlRouterProvider.otherwise("/acercaDe")
 })
