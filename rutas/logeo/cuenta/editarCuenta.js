@@ -1,19 +1,19 @@
 module.exports = async (app) => {
-  const ObjectID = require('mongodb').ObjectID
-
-  let db = await require('../../../utils/db.js')()
+  const Usuario = require('../../../config/schemas/usuario.js')
 
   app.patch('/logeo/cuenta',
     require('../../../utils/login.js').estaLogeado,
     async (req, res) => {
       try {
-        await db.collection('usuarios').replaceOne({
-          _id: req.user._id
+        await Usuario.find().updateOne({
+          _id: req.body._id
         }, {
-          nombre: req.user.nombre,
-          apellido: req.user.apellido,
-          usuario: req.user.usuario,
-          email: req.user.email
+          $set: {
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            usuario: req.body.usuario,
+            email: req.body.email
+          }
         })
 
         res.json({
