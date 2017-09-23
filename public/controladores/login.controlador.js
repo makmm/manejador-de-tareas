@@ -1,5 +1,5 @@
 app.controller('LoginController', function($http, $state, loginServicio){
-  var loginCtrl = this
+  let loginCtrl = this
 
   loginCtrl.usuarioSiendoLogeado = {}
   loginCtrl.mostrarAlerta = false
