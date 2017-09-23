@@ -3,11 +3,24 @@ const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
 let usuarioSchema = mongoose.Schema({
-  nombre: String,
-  apellido: String,
-  usuario: String,
-  email: String,
-  contrasena: String
+  nombre: {
+    type: String
+  },
+  apellido: {
+    type: String
+  },
+  usuario: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  contrasena: {
+    type: String,
+    required: true
+  }
 })
 
 // Uso `function()` ya que `() =>` no deja usar `this`
