@@ -1,5 +1,5 @@
 module.exports = async (app) => {
-  const User = require('./schemas/user.js')
+  const Usuario = require('./schemas/usuario.js')
 
   const passport = require('passport')
   const LocalStrategy = require('passport-local').Strategy
@@ -10,35 +10,35 @@ module.exports = async (app) => {
 
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await user.findById(id)
-      done(null, user)
+      const usuario = await Usuario.findById(id)
+      done(null, usuario)
     } catch(e){
       done(e)
     }
   })
 
   passport.use('local', new LocalStrategy({
-    usernameField: 'user',
-    passwordField: 'password',
+    usernameField: 'usuario',
+    passwordField: 'contrasena',
     passReqToCallback: true
   },
-  async (req, username, password, done) => {
+  async (req, nombreDeUsuario, contrasena, done) => {
     try {
-      let user = await User.findOne({
-        user: username
+      let usuario = await Usuario.findOne({
+        usuario: nombreDeUsuario
       })
 
-      if(!user)
+      if(!usuario)
         return done(null, false, {
           error: "El usuario o la contraseña es incorrecta."
         })
 
-      if(!user.comparePasswords(password))
+      if(!usuario.compararContrasenas(contrasena))
         return done(null, false, {
           error: "El usuario o la contraseña es incorrecta."
         })
 
-      return done(null, user)
+      return done(null, usuario)
     } catch(e){
       return done(e)
     }

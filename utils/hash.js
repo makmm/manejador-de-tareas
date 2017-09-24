@@ -1,9 +1,9 @@
 const bCrypt = require('bcrypt-nodejs')
 
-module.exports.comparePasswords = (password1, password2) => {
-  return bCrypt.compareSync(password1, password2)
+module.exports.compararContrasenas = (contrasena1, contrasena2) => {
+  return bCrypt.compareSync(contrasena1, contrasena2)
 }
 
-module.exports.createHash = (password) => {
-  return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null)
+module.exports.crearHash = (contrasena) => {
+  return bCrypt.hashSync(contrasena, bCrypt.genSaltSync(10), null)
 }
