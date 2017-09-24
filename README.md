@@ -8,9 +8,8 @@ git clone https://github.com/makmm/manejador-de-tareas # o tu fork!
 npm i
 ```
 ...suponiendo que tenes instalado mongo y configurado para manejador-de-tareas...
+(también hay que hacer un config.js (mirar config.ejemplo.js))
 ```
-# No requerido, automaticamente va a localhost
-export mongohost="[Insertar link de mongo, ej: mongodb://localhost/manejador-de-tareas]"
 npm start
 ```
 Listo!
