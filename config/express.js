@@ -1,5 +1,5 @@
 module.exports = () => {
-  const puerto = process.env.PORT || 8080;
+  const port = process.env.PORT || 8080;
 
   const express = require('express')
   const path = require('path')
@@ -16,17 +16,17 @@ module.exports = () => {
   app.use(morgan('dev'))
 
   app.use(expressSession({
-    secret: require('../config.js').secret_key,
+    secret: process.env.SECRET_KEY,
     resave: true,
     saveUninitialized: true
   }))
   app.use(passport.initialize())
   app.use(passport.session())
 
-  require('../rutas/index.js')(app)
+  require('../routes/index.js')(app)
 
-  app.listen(puerto, () =>
-    console.log("[Express] Iniciado en puerto " + puerto)
+  app.listen(port, () =>
+    console.log("[Express] Iniciado en puerto " + port)
   )
 
   return app
