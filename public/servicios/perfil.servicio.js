@@ -1,21 +1,21 @@
-app.service('perfilServicio', function($http){
-  var perfilServicio = this
+app.service('profileService', function($http){
+  var profileService = this
 
-  perfilServicio.perfil = {}
+  profileService.perfil = {}
 
-  perfilServicio.conseguirPerfil = () => {
-    return $http.get('/logeo/cuenta')
+  profileService.getProfile = () => {
+    return $http.get('/login/profile')
   }
 
-  perfilServicio.editarPerfil = (perfil) => {
-    return $http.patch('/logeo/cuenta', perfil)
+  profileService.editProfile = (profile) => {
+    return $http.patch('/login/profile', profile)
   }
 
-  perfilServicio.actualizarPerfil = () => {
-    const pedido = perfilServicio.conseguirPerfil()
-    pedido.then((respuesta) => {
-      perfilServicio.perfil = respuesta.data
+  profileService.updateProfile = () => {
+    const request = profileService.getProfile()
+    request.then((response) => {
+      profileService.profile = response.data
     })
-    return pedido
+    return request
   }  
 })
