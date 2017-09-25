@@ -23,7 +23,7 @@ module.exports = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  require('../routes/index.js')(app)
+  require('../rutas/index.js')(app)
 
   app.listen(puerto, () =>
     console.log("[Express] Iniciado en puerto " + puerto)
