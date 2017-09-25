@@ -1,46 +1,46 @@
-app.controller('PerfilController', function($scope, perfilServicio, loginServicio){
-  let perfilCtrl = this
+app.controller('ProfileController', function($scope, profileService, loginService){
+  let profileCtrl = this
 
-  perfilCtrl.perfil = {}
+  profileCtrl.profile = {}
 
-  perfilCtrl.loginServicio = loginServicio
+  profileCtrl.loginService = loginService
 
-  perfilCtrl.editando = false
+  profileCtrl.editing = false
 	
-  perfilCtrl.actualizarPerfil = () => {
-    perfilServicio.actualizarPerfil()
-      .then((respuesta) => {
-        perfilCtrl.perfil = respuesta.data
+  profileCtrl.updateProfile = () => {
+    profileService.updateProfile()
+      .then((response) => {
+        profileCtrl.profile = response.data
       })
   }
   
-  perfilCtrl.editarPerfil = (perfil) => {
-    if(!(perfil.nombre && perfil.apellido) &&
-       (perfil.nombre || perfil.apellido)){
-      perfilCtrl.mostrarAlerta = true
-      perfilCtrl.tipoDeAlerta = "danger"
-      perfilCtrl.alerta = "Es necesario escribir el nombre y el apellido"
+  profileCtrl.editProfile = (profile) => {
+    if(!(profile.name && profile.lastname) &&
+       (profile.name || profile.lastname)){
+      profileCtrl.showAlert = true
+      profileCtrl.typeOfAlert = "danger"
+      profileCtrl.alert = "Es necesario escribir el nombre y el apellido"
 
-      perfilCtrl.editando = true
+      profileCtrl.editing = true
      
       return
     }
 
-    if(!($scope.perfil.$valid)){
-      perfilCtrl.mostrarAlerta = true
-      perfilCtrl.tipoDeAlerta = "danger"
-      perfilCtrl.alerta = "No es posible editar, perfil no valido. Mirar los datos que estan en rojo."
+    if(!($scope.profile.$valid)){
+      profileCtrl.showAlert = true
+      profileCtrl.typeOfAlert = "danger"
+      profileCtrl.alert = "No es posible editar, profile no valido. Mirar los datos que estan en rojo."
 
-      perfilCtrl.editando = true
+      profileCtrl.editing = true
      
       return
     }
 
-    perfilServicio.editarPerfil(perfil)
-      .then((respuesta) => {
-        perfilCtrl.perfil = perfil
-        perfilCtrl.editando = false
-      }, (respuesta) => {
+    profileService.editProfile(profile)
+      .then((response) => {
+        profileCtrl.profile = profile
+        profileCtrl.editing = false
+      }, (response) => {
         /*
          * Boton de reintentar,
          * sin contador
@@ -48,12 +48,12 @@ app.controller('PerfilController', function($scope, perfilServicio, loginServici
       })
   }
 
-  perfilCtrl.toggleEdicionPerfil = () => {
-    if(perfilCtrl.editando)
-      perfilCtrl.editarPerfil(perfilCtrl.perfil)
+  profileCtrl.toggleProfileEditing = () => {
+    if(profileCtrl.editing)
+      profileCtrl.editProfile(profileCtrl.profile)
     else 
-      perfilCtrl.editando = true
+      profileCtrl.editing = true
   }
 
-  perfilCtrl.actualizarPerfil()
+  profileCtrl.updateProfile()
 })
