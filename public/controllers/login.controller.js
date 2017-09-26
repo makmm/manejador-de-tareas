@@ -1,20 +1,20 @@
-app.controller('LoginController', function($http, $state, loginServicio){
+app.controller('LoginController', function($http, $state, loginService){
   let loginCtrl = this
 
-  loginCtrl.usuarioSiendoLogeado = {}
-  loginCtrl.mostrarAlerta = false
+  loginCtrl.userBeingLoggedIn = {}
+  loginCtrl.showAlert = false
 
   loginCtrl.login = (usuario) => {
-    loginServicio.logearse(usuario.usuario, usuario.contrasena)
-      .then((respuesta) => {
-        $state.go('acercaDe') 
-      }, (respuesta) => {
-        loginCtrl.mostrarAlerta = true
-        loginCtrl.tipoDeAlerta = "danger"
-        if(respuesta.status == 401){
-          loginCtrl.alerta = "Email/Usuario no encontrado o contraseña no valida"
+    loginService.logearse(usuario.usuario, usuario.contrasena)
+      .then((response) => {
+        $state.go('aboutUs') 
+      }, (response) => {
+        loginCtrl.showAlert = true
+        loginCtrl.alertType = "danger"
+        if(response.status == 401){
+          loginCtrl.alert = "Email/Usuario no encontrado o contraseña no valida"
         } else {
-          loginCtrl.alerta = "Error desconocido..."
+          loginCtrl.alert = "Error desconocido..."
         }
       })
   }
