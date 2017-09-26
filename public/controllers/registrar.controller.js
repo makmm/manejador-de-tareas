@@ -1,18 +1,18 @@
-app.controller('RegistrarController', function($http, $state, loginServicio){
-  let registrarCtrl = this
+app.controller('RegisterController', function($http, $state, loginService){
+  let registerCtrl = this
 
-  registrarCtrl.usuarioSiendoRegistrado = {}
-  registrarCtrl.mostrarAlerta = false
-  registrarCtrl.tipoDeAlerta = ""
+  registerCtrl.userBeingRegistered = {}
+  registerCtrl.showAlert = false
+  registerCtrl.alertType = ""
 
-  registrarCtrl.registrar = () => {
-    loginServicio.crearCuenta(registrarCtrl.usuarioSiendoRegistrado)
-      .then(function successCallback(respuesta){
+  registerCtrl.register = () => {
+    loginService.createAccount(registerCtrl.userBeingRegistered)
+      .then(function successCallback(response){
         $state.go('login')
-      }, function errorCallback(respuesta){
-        registrarCtrl.mostrarAlerta = true
-        registrarCtrl.tipoDeAlerta = "danger"
-        registrarCtrl.alerta = respuesta.data.error
+      }, function errorCallback(response){
+        registerCtrl.showAlert = true
+        registerCtrl.alertType = "danger"
+        registerCtrl.alert = response.data.error
       })
   }
 })
