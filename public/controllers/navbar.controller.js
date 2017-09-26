@@ -1,11 +1,11 @@
-app.controller('NavbarController', function($state, loginServicio, perfilServicio){
+app.controller('NavbarController', function($state, loginService, profileService){
   let navbarCtrl = this
 
-  navbarCtrl.estaLogeado = () => loginServicio.logeado
-  navbarCtrl.conseguirPerfil = () => perfilServicio.perfil
+  navbarCtrl.isLoggedIn = () => loginService.loggedIn
+  navbarCtrl.conseguirPerfil = () => profileService.profile
 
-  navbarCtrl.cerrarSesion = () => {
-    loginServicio.eliminarSesion()
+  navbarCtrl.logOut = () => {
+    loginService.deleteSession()
       .then(() => {
         $state.go('login')
       })
