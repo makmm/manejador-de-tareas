@@ -1,15 +1,15 @@
-app.controller('MateriasController', function($http){
-  var materiasCtrl = this
+app.controller('TopicsController', function($http){
+  var topicsCtrl = this
 
-  materiasCtrl.materias = []
-  materiasCtrl.creando = false
-  materiasCtrl.materiaSiendoEditada = null
+  topicsCtrl.topics = []
+  topicsCtrl.creating = false
+  topicsCtrl.topicBeingCreated = null
 
-  materiasCtrl.recargarMaterias = () =>
-    $http.get('/materias.json')
-      .then(function successCallback(respuesta) {
-        materiasCtrl.materias = respuesta.data
-      }, function errorCallback(respuesta) {
+  topicsCtrl.updateTopics = () =>
+    $http.get('/topics.json')
+      .then(function successCallback(response) {
+        topicsCtrl.topics = response.data
+      }, function errorCallback(response) {
         /*
          * Hacer que aparece una alerta de
          * esas que te da bootstrap, con
@@ -19,67 +19,67 @@ app.controller('MateriasController', function($http){
          */
       })
 
-  materiasCtrl.eliminarMateria = (materiaAEliminar) =>
-    $http.delete('/eliminarMateria', {
-      data: {_id: materiaAEliminar._id},
+  topicsCtrl.deleteTopic = (topicBeingDeleted) =>
+    $http.delete('/deleteTopic', {
+      data: {_id: topicBeingDeleted._id},
       headers: {
         'Content-type': 'application/json;charset=utf-8'
       }
     })
-      .then(function successCallback(respuesta) {
-        materiasCtrl.materias.splice(
-          materiasCtrl.materias.findIndex((materia) => materia == materiaAEliminar), 1
+      .then(function successCallback(response) {
+        topicsCtrl.topics.splice(
+          topicsCtrl.topics.findIndex((topic) => topic == topicBeingDeleted), 1
         )
-      }, function errorCallback(respuesta) {
+      }, function errorCallback(response) {
         /*
          * Boton de reintentar,
          * sin contador
          */
       })
 
-  materiasCtrl.empezarAEditarMateria = (materia) =>
-    materiasCtrl.materiaSiendoEditada = materia
+  topicsCtrl.startToEditTopic = (topic) =>
+    topicsCtrl.topicBeingEdited = topic
 
-  materiasCtrl.toggleEdicionMateria = (materia) => {
-    if(materiasCtrl.materiaSiendoEditada == materia)
-      materiasCtrl.editarMateria(materia)
+  topicsCtrl.toggleEditTopic = (topic) => {
+    if(topicsCtrl.topicBeingEdited == topic)
+      topicsCtrl.editTopic(topic)
     else
-      materiasCtrl.empezarAEditarMateria(materia)
+      topicsCtrl.startToEditTopic(topic)
   }
 
-  materiasCtrl.terminarDeEditarMateria = () =>
-    materiasCtrl.materiaSiendoEditada = null
+  topicsCtrl.stopEditingTopic = () =>
+    topicsCtrl.topicBeingEdited = null
 
-  materiasCtrl.editarMateria = (materia) =>
-    $http.patch('/editarMateria', materia)
-      .then(function successCallback(respuesta) {
-        materiasCtrl.terminarDeEditarMateria()
-      }, function errorCallback(respuesta) {
+  topicsCtrl.editTopic = (topic) =>
+    $http.patch('/editTopic', topic)
+      .then(function successCallback(response) {
+        topicsCtrl.stopEditingTopic()
+      }, function errorCallback(response) {
         /*
          * Boton de reintentar,
          * sin contador
          */
       })
 
-  materiasCtrl.empezarNuevaMateria = (materia) =>
-    materiasCtrl.creando = true
+  topicsCtrl.startNewTopic = (topic) =>
+    topicsCtrl.creating = true
 
-  materiasCtrl.terminarDeCrearMateria = () => {
-    materiasCtrl.creando = false
-    materiasCtrl.nuevaMateria = {}
+  topicsCtrl.stopCreatingTopic = () => {
+    topicsCtrl.creating = false
+    topicsCtrl.newTopic = {}
   }
 
-  materiasCtrl.anadirMateria = (materia) =>
-    $http.post('/crearMateria', materia)
-      .then(function successCallback(respuesta) {
-        materiasCtrl.materias.push(respuesta.data)
-        materiasCtrl.terminarDeCrearMateria()
-      }, function errorCallback(respuesta) {
+  topicsCtrl.addTopic = (topic) =>
+    $http.post('/createTopic', topic)
+      .then(function successCallback(response) {
+        topicsCtrl.topics.push(response.data)
+        topicsCtrl.stopEditingTopic()
+      }, function errorCallback(response) {
         /*
          * Boton de reintentar,
          * sin contador
          */
       })
 
-  materiasCtrl.recargarMaterias()
+  topicsCtrl.updateTopics()
 })
