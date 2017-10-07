@@ -1,44 +1,44 @@
-app.service('loginServicio', function($http, perfilServicio){
-  let loginServicio = this
+app.service('loginService', function($http, profileService){
+  let loginService = this
 
-  loginServicio.logeado = false
+  loginService.loggedIn = false
 
-  loginServicio.logearse = (usuario, contrasena) =>
-    $http.post('/logeo/sesion', {
-      usuario: usuario,
-      contrasena: contrasena
+  loginService.logIn = (user, password) =>
+    $http.post('/login/session', {
+      user: user,
+      password: password
     })
-      .then((respuesta) => {
-        loginServicio.logeado = true
-        perfilServicio.actualizarPerfil()
+      .then((response) => {
+        loginService.loggedIn = true
+        profileService.updateProfile()
       })
 
-  loginServicio.checkearLogeado = () =>
-    $http.get('/logeo/sesion')
-      .then((respuesta) => {
-        loginServicio.logeado = respuesta.data
+  loginService.checkLoggedIn = () =>
+    $http.get('/login/session')
+      .then((response) => {
+        loginService.loggedIn = response.data
       })
 
-  loginServicio.recargarSesion = () =>
-    loginServicio.checkearLogeado()
+  loginService.reloadSession = () =>
+    loginService.checkLoggedIn()
       .then(function(){
-        if(loginServicio.logeado)
-          perfilServicio.actualizarPerfil()
+        if(loginService.loggedIn)
+          profileService.updateProfile()
       })
 
-  loginServicio.eliminarSesion = () =>
-    $http.delete('/logeo/sesion')
-      .then((respuesta) => {
+  loginService.deleteSession = () =>
+    $http.delete('/login/session')
+      .then((response) => {
         // TODO: Ignorar si da un error
-        perfilServicio.perfil = null
-        loginServicio.logeado = false
+        profileService.profile = null
+        loginService.loggedIn = false
       })
 
-  loginServicio.crearCuenta = (cuenta) =>
-    $http.post('/logeo/cuenta', cuenta)
+  loginService.createAccount = (account) =>
+    $http.post('/login/account', account)
 
   angular.element(document).ready(() => {
-    loginServicio.recargarSesion()
+    loginService.reloadSession()
   })
 
 })
