@@ -1,0 +1,24 @@
+<div class="container">
+  <form class="form-register">
+    <h2>Registrar</h2>
+    <div class="form-group">
+      <input ng-model="registerCtrl.userBeingRegistered.name" type="text" class="form-control input-lg" placeholder="Nombre">
+      <input ng-model="registerCtrl.userBeingRegistered.lastname" type="text" class="form-control input-lg" placeholder="Apellido">
+    </div>
+    <div class="form-group">
+      <input ng-model="registerCtrl.userBeingRegistered.user" type="text" class="form-control input-lg" placeholder="Usuario*" required>
+    </div>
+    <div class="form-group">
+      <input ng-model="registerCtrl.userBeingRegistered.email" type="text" class="form-control input-lg" placeholder="Email*" required>
+    </div>
+    <div class="form-group">
+      <input ng-model="registerCtrl.userBeingRegistered.password" type="password" class="form-control input-lg" placeholder="Contraseña*" required>
+      <input ng-model="registerCtrl.userBeingRegistered.verifyPassword" type="password" class="form-control input-lg" placeholder="Repetir contraseña*" required>
+    </div>
+    <p><small>* = Requerido</small></p>
+    <div class="form-group">
+      <button ng-click="registerCtrl.register()" class="btn btn-primary btn-lg btn-block">Registrar</button>
+      <p>¿Ya tenes una cuenta? <a ui-sref="login">Iniciar Sesión</a></p>
+    </div>
+  </form>
+</div>
