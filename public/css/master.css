@@ -12,31 +12,31 @@ input.ng-invalid {
   padding-bottom: 1.5%;
 }
 
-.tarea,
-.materia {
+.homework,
+.topic {
 
 }
-  .tarea .btn-toolbar,
-  .materia .btn-toolbar {
+  .homework .btn-toolbar,
+  .topic .btn-toolbar {
   	display: inline-block;
   	float: right;
   }
-  .tarea .info-tarea,
-  .materia .info-materia {
+  .homework .info-homework,
+  .topic .info-topic {
     display: inline-block;
   }
-    .tarea .info-tarea h4,
-    .materia .info-materia h4,
-    .tarea .info-tarea p,
-    .materia .info-materia p {
+    .homework .info-homework h4,
+    .topic .info-topic h4,
+    .homework .info-homework p,
+    .topic .info-topic p {
       display: inline-block;
     }
-    .tarea .info-tarea .tarea-subinfo {
+    .homework .info-homework .homework-subinfo {
 
     }
 
-  .tarea .editar-tarea,
-  .materia .editar-materia {
+  .homework .edit-homework,
+  .topic .edit-topic {
     width: 80%;
     display: inline-block;
   }
@@ -67,33 +67,33 @@ input.ng-invalid {
 
 /* Registrar */
 
-.form-registrar {
+.form-register {
   max-width: 500px;
   padding: 15px;
   margin: 0 auto;
 }
-  .form-registrar .form-group input {
+  .form-register .form-group input {
     margin-top: 7px;
   }
 
 /* Perfil */
 
-#perfil-nav {
+#profile-nav {
   margin-bottom: 20px;
 }
 
-.form-perfil {
+.form-profile {
 
 }
-  .form-perfil .form-perfil-nombre-completo {
+  .form-profile .form-profile-nombre-completo {
 
   }
-    .form-perfil .form-perfil-nombre-completo input:first-of-type {
+    .form-profile .form-profile-nombre-completo input:first-of-type {
       margin-bottom: -1px;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
-    .form-perfil .form-perfil-nombre-completo input:last-of-type {
+    .form-profile .form-profile-nombre-completo input:last-of-type {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
