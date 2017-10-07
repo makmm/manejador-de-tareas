@@ -64,4 +64,4 @@ typings/
 app.json
 
 # Cosas del proyecto
-config.json
+config.js
