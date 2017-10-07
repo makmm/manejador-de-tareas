@@ -37,14 +37,14 @@ app.controller('TopicsController', function($http){
          */
       })
 
-  topicsCtrl.startToEditTopic = (topic) =>
+  topicsCtrl.startEditingTopic = (topic) =>
     topicsCtrl.topicBeingEdited = topic
 
   topicsCtrl.toggleEditTopic = (topic) => {
     if(topicsCtrl.topicBeingEdited == topic)
       topicsCtrl.editTopic(topic)
     else
-      topicsCtrl.startToEditTopic(topic)
+      topicsCtrl.startEditingTopic(topic)
   }
 
   topicsCtrl.stopEditingTopic = () =>
@@ -73,7 +73,7 @@ app.controller('TopicsController', function($http){
     $http.post('/createTopic', topic)
       .then(function successCallback(response) {
         topicsCtrl.topics.push(response.data)
-        topicsCtrl.stopEditingTopic()
+        topicsCtrl.stopCreatingTopic()
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,
