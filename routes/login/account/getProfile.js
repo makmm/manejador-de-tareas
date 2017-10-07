@@ -1,7 +1,7 @@
 module.exports = async (app) => {
   const passport = require('passport')
 
-  app.get('/login/account',
+  app.get('/login/profile',
     require('../../../utils/login.js').isLoggedIn,
     async (req, res) => {
       res.json({
