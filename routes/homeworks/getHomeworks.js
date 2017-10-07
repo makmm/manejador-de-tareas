@@ -12,7 +12,7 @@ module.exports = async (app) => {
         homeworks[i] = homeworks[i].toObject({
           virtuals: true
         })
-        homeworks[i].topic = await tareas[i].topic
+        homeworks[i].topic = await homeworks[i].topic
       }
 
       res.send(homeworks)
