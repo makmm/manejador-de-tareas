@@ -59,29 +59,29 @@ app.controller('HomeworksController', function($http, $scope){
          */
       })
 
-  homeworksCtrl.empezarAEditarHomework = (homework) =>
-    homeworksCtrl.homeworkSiendoEditada = homework
+  homeworksCtrl.startEditingHomework = (homework) =>
+    homeworksCtrl.homeworkBeingEdited = homework
 
-  homeworksCtrl.toggleEdicionHomework = (homework) => {
-    if(homeworksCtrl.homeworkSiendoEditada == homework)
-      homeworksCtrl.editarHomework(homework)
+  homeworksCtrl.toggleEditHomework = (homework) => {
+    if(homeworksCtrl.homeworkBeingEdited == homework)
+      homeworksCtrl.editHomework(homework)
     else
-      homeworksCtrl.empezarAEditarHomework(homework)
+      homeworksCtrl.startEditingHomework(homework)
   }
 
-  homeworksCtrl.terminarDeEditarHomework = () =>
-    homeworksCtrl.homeworkSiendoEditada = null
+  homeworksCtrl.stopEditingHomework = () =>
+    homeworksCtrl.homeworkBeingEdited = null
 
-  homeworksCtrl.editarHomework = (homework) => {
+  homeworksCtrl.editHomework = (homework) => {
     if(homework.topic){
       homework.topicId = homework.topic._id
       delete homework.topic
     }
 
-    $http.patch('/editarHomework', homework)
+    $http.patch('/editHomework', homework)
       .then(function successCallback(response) {
         homework.topic = homeworksCtrl.topics.find(m => m._id == homework.topicId)
-        homeworksCtrl.terminarDeEditarHomework()
+        homeworksCtrl.stopEditingHomework()
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,
@@ -90,14 +90,14 @@ app.controller('HomeworksController', function($http, $scope){
       })
   }
 
-  homeworksCtrl.cambiarMateria = (homework, topic) => {
+  homeworksCtrl.changeTopic = (homework, topic) => {
     homework.topicId = topic._id
     delete homework.topic
 
-    $http.patch('/editarHomework', homework)
+    $http.patch('/editHomework', homework)
       .then(function successCallback(response) {
         homework.topic = topic
-        homeworksCtrl.terminarDeEditarHomework()
+        homeworksCtrl.stopEditingHomework()
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,
@@ -106,29 +106,31 @@ app.controller('HomeworksController', function($http, $scope){
       })
   }
 
-  homeworksCtrl.empezarNuevaHomework = (homework) =>
-    homeworksCtrl.creando = true
-
-  homeworksCtrl.setearMateria = (homework, topic) => {
-    homework.topic = topic;
+  homeworksCtrl.startNewHomework = (homework) => {
+    homeworksCtrl.creating = true
+    homeworksCtrl.newHomework = {}
   }
 
-  homeworksCtrl.terminarDeCrearHomework = () => {
-    homeworksCtrl.creando = false
-    homeworksCtrl.nuevaHomework = {}
+  homeworksCtrl.setTopic = (homework, topic) => {
+    homework.topic = topic
   }
 
-  homeworksCtrl.anadirHomework = (homework) => {
+  homeworksCtrl.stopCreatingHomework = () => {
+    homeworksCtrl.creating = false
+    homeworksCtrl.newHomework = {}
+  }
+
+  homeworksCtrl.addHomework = (homework) => {
     if(homework.topic &&
       homework.topic._id){
       homework.topicId = homework.topic._id
       delete homework.topic
     }
 
-    $http.post('/crearHomework', homework)
+    $http.post('/createHomework', homework)
       .then(function successCallback(response) {
         homeworksCtrl.homeworks.push(response.data)
-        homeworksCtrl.terminarDeCrearHomework()
+        homeworksCtrl.stopCreatingHomework()
       }, function errorCallback(response) {
         /*
          * Boton de reintentar,
@@ -137,5 +139,5 @@ app.controller('HomeworksController', function($http, $scope){
       })
   }
 
-  homeworksCtrl.recargarHomeworks()
+  homeworksCtrl.updateHomeworks()
 })
