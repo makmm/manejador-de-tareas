@@ -43,7 +43,7 @@
               <a>Iniciar Sesión</a>
             </li>
             <li ng-show="navbarCtrl.isLoggedIn()" class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido, {{navbarCtrl.conseguirPerfil().usuario}}! <span class="caret"></span></a>
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido, {{navbarCtrl.getProfile().user}}! <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a ui-sref="profile">Perfil</a></li>
                 <li role="separator" class="divider"></li>
