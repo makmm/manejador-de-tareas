@@ -4,8 +4,8 @@ app.controller('LoginController', function($http, $state, loginService){
   loginCtrl.userBeingLoggedIn = {}
   loginCtrl.showAlert = false
 
-  loginCtrl.login = (usuario) => {
-    loginService.logearse(usuario.usuario, usuario.contrasena)
+  loginCtrl.logIn = (user) => {
+    loginService.logIn(user.user, user.password)
       .then((response) => {
         $state.go('aboutUs') 
       }, (response) => {
