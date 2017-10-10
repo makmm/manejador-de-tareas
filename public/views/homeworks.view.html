@@ -1,0 +1,70 @@
+<div id="homeworks">
+  <div id="toolbar">
+    <button class="btn btn-primary" ng-click="homeworksCtrl.startNewHomework()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Crear Tarea
+    </button>
+    <button class="btn btn-primary" ng-click="homeworksCtrl.updateHomeworks()">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+      Recargar
+    </button>
+  </div>
+  <ul class="list-group panel panel-default">
+    <li ng-repeat="homework in homeworksCtrl.homeworks track by $index" ng-dblclick="homeworksCtrl.startEditingHomework(homework)" class="homework list-group-item">
+      <div class="info-homework" ng-hide="homeworksCtrl.homeworkBeingEdited == homework">
+        <h4>{{homework.name}}</h4>
+        <p>{{homework.description}}</p>
+        <br/>
+        <p class="homework-subinfo">
+          Materia: <strong>{{homework.topic.name || "Materia no definida // editar y arreglar, por favor"}}</strong>
+        </p>
+      </div>
+      <div class="editar-homework" ng-show="homeworksCtrl.homeworkBeingEdited == homework">
+        <form ng-submit="homeworksCtrl.editHomework(homework)">
+          <input ng-model="homework.name" placeholder="Titulo de tarea" class="edit form-control" type="edit">
+        </form>
+        <form ng-submit="homeworksCtrl.editHomework(homework)">
+          <input ng-model="homework.description" placeholder="Descripción de tarea" class="edit form-control" type="edit">
+        </form>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Materia
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li ng-repeat="topic in homeworksCtrl.topics">
+              <a ng-click="homeworksCtrl.changeTopic(homework, topic)">{{topic.name}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="btn-toolbar btn-group" role="group">
+        <button ng-click="homeworksCtrl.toggleEditHomework(homework)" class="btn btn-primary btn-accion-homework" aria-label="Editar">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </button>
+        <button ng-click="homeworksCtrl.deleteHomework(homework)" class="btn btn-danger btn-accion-homework" aria-label="Eliminar">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </button>
+      </div>
+    </li>
+    <li ng-show="homeworksCtrl.creating" class="homework list-group-item">
+      <form ng-submit="homeworksCtrl.addHomework(homeworksCtrl.newHomework)">
+        <input ng-model="homeworksCtrl.newHomework.name" placeholder="Titulo de tarea" class="edit form-control" type="edit">
+      </form>
+      <form ng-submit="homeworksCtrl.addHomework(homeworksCtrl.newHomework)">
+        <input ng-model="homeworksCtrl.newHomework.description" placeholder="Descripción de tarea" class="edit form-control" type="edit">
+      </form>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {{homeworksCtrl.newHomework.topic.name || "Materia"}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li ng-repeat="topic in homeworksCtrl.topics">
+            <a ng-click="homeworksCtrl.setTopic(homeworksCtrl.newHomework, topic)">{{topic.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

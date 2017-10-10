@@ -28,26 +28,26 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li ui-sref="tareas" ui-sref-active="active">
+            <li ui-sref="homeworks" ui-sref-active="active">
               <a>Tareas</a>
             </li>
-            <li ui-sref="materias" ui-sref-active="active">
+            <li ui-sref="topics" ui-sref-active="active">
               <a>Materias</a>
             </li>
-            <li ui-sref="acercaDe" ui-sref-active="active">
+            <li ui-sref="aboutUs" ui-sref-active="active">
               <a>Acerca de</a>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li ng-hide="navbarCtrl.estaLogeado()" ui-sref="login" ui-sref-active="active">
+            <li ng-hide="navbarCtrl.isLoggedIn()" ui-sref="login" ui-sref-active="active">
               <a>Iniciar Sesión</a>
             </li>
-            <li ng-show="navbarCtrl.estaLogeado()" class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido, {{navbarCtrl.conseguirPerfil().usuario}}! <span class="caret"></span></a>
+            <li ng-show="navbarCtrl.isLoggedIn()" class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bienvenido, {{navbarCtrl.getProfile().user}}! <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a ui-sref="perfil">Perfil</a></li>
+                <li><a ui-sref="profile">Perfil</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a ng-click="navbarCtrl.cerrarSesion()">Cerrar Sesión</a></li>
+                <li><a ng-click="navbarCtrl.logOut()">Cerrar Sesión</a></li>
               </ul>
             </li>
           </ul>
@@ -55,21 +55,21 @@
       </div><!-- /.container-fluid -->
     </nav>
     <main>
-      <div id="tareas-body">
+      <div id="homeworks-body">
         <ui-view></ui-view>
       </div>
     </main>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js" charset="utf-8"></script>
     <script src="//unpkg.com/angular-ui-router@0.3.2/release/angular-ui-router.js" charset="utf-8"></script>
-    <script src="/js/aplicacion.js" charset="utf-8"></script>
-    <script src="/servicios/perfil.servicio.js" charset="utf-8"></script>
-    <script src="/servicios/login.servicio.js" charset="utf-8"></script>
-    <script src="/controladores/tabs.controlador.js" charset="utf-8"></script>
-    <script src="/controladores/tareas.controlador.js" charset="utf-8"></script>
-    <script src="/controladores/materias.controlador.js" charset="utf-8"></script>
-    <script src="/controladores/login.controlador.js" charset="utf-8"></script>
-    <script src="/controladores/registrar.controlador.js" charset="utf-8"></script>
-    <script src="/controladores/perfil.controlador.js" charset="utf-8"></script>
-    <script src="/controladores/navbar.controlador.js" charset="utf-8"></script>
+    <script src="/js/application.js" charset="utf-8"></script>
+    <script src="/services/profile.service.js" charset="utf-8"></script>
+    <script src="/services/login.service.js" charset="utf-8"></script>
+    <script src="/controllers/tabs.controller.js" charset="utf-8"></script>
+    <script src="/controllers/homeworks.controller.js" charset="utf-8"></script>
+    <script src="/controllers/topics.controller.js" charset="utf-8"></script>
+    <script src="/controllers/login.controller.js" charset="utf-8"></script>
+    <script src="/controllers/register.controller.js" charset="utf-8"></script>
+    <script src="/controllers/profile.controller.js" charset="utf-8"></script>
+    <script src="/controllers/navbar.controller.js" charset="utf-8"></script>
   </body>
 </html>
