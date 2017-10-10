@@ -1,55 +1,55 @@
 <div class="container">
-  <div ng-show="perfilCtrl.loginServicio.logeado">
+  <div ng-show="profileCtrl.loginService.loggedIn">
     <div class="page-header">
       <h1>Perfil</h1>
     </div>
 
-    <div id="perfil-nav">
-      <button class="btn btn-primary" ng-click="perfilCtrl.actualizarPerfil()">
+    <div id="profile-nav">
+      <button class="btn btn-primary" ng-click="profileCtrl.updateProfile()">
         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
         Recargar
       </button>
-      <button class="btn btn-primary" ng-click="perfilCtrl.toggleEdicionPerfil()">
+      <button class="btn btn-primary" ng-click="profileCtrl.toggleProfileEditing()">
         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         Editar
       </button>
     </div>
 
-    <div ng-show="perfilCtrl.mostrarAlerta" class="alert" ng-class="{'alert-danger': perfilCtrl.tipoDeAlerta == 'danger'}" role="alert">
+    <div ng-show="profileCtrl.showAlert" class="alert" ng-class="{'alert-danger': profileCtrl.alertType == 'danger'}" role="alert">
       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only">Error:</span>
-      {{perfilCtrl.alerta}}
+      {{profileCtrl.alert}}
     </div>
 
-    <div ng-hide="perfilCtrl.editando" class="panel panel-default">
+    <div ng-hide="profileCtrl.editing" class="panel panel-default">
       <ul class="list-group">
-        <li ng-show="perfilCtrl.perfil.nombre || perfilCtrl.perfil.apellido" class="list-group-item">
-          Nombre: {{perfilCtrl.perfil.nombre + " " + perfilCtrl.perfil.apellido}}
+        <li ng-show="profileCtrl.profile.name || profileCtrl.profile.lastname" class="list-group-item">
+          Nombre: {{profileCtrl.profile.name + " " + profileCtrl.profile.lastname}}
         </li>
         <li class="list-group-item">
-          Usuario: {{perfilCtrl.perfil.usuario}}
+          Usuario: {{profileCtrl.profile.user}}
         </li>
         <li class="list-group-item">
-          Email: {{perfilCtrl.perfil.email}}
+          Email: {{profileCtrl.profile.email}}
         </li>
       </ul>
     </div>
 
     <!-- Modo edición -->
-    <form ng-submit="perfilCtrl.editarPerfil(perfilCtrl.perfil)" ng-show="perfilCtrl.editando" class="form-perfil" name="perfil">
+    <form ng-submit="profileCtrl.editProfile(profileCtrl.profile)" ng-show="profileCtrl.editing" class="form-profile" name="profile">
       <div class="panel panel-default">
         <ul class="list-group">
-          <li class="form-perfil-nombre-completo list-group-item">
-            <input ng-model="perfilCtrl.perfil.nombre" placeholder="Nombre" class="edit form-control" type="edit">
-            <input ng-model="perfilCtrl.perfil.apellido" placeholder="Apellido" class="edit form-control" type="edit">
+          <li class="form-profile-full-name list-group-item">
+            <input ng-model="profileCtrl.profile.name" placeholder="Nombre" class="edit form-control" type="edit">
+            <input ng-model="profileCtrl.profile.lastname" placeholder="Apellido" class="edit form-control" type="edit">
           </li>
           <li class="list-group-item">
-            <input ng-model="perfilCtrl.perfil.usuario" placeholder="Usuario" class="edit form-control" type="edit">
+            <input ng-model="profileCtrl.profile.user" placeholder="Usuario" class="edit form-control" type="edit">
           </li>
           <li class="list-group-item">
-            <input ng-model="perfilCtrl.perfil.email" placeholder="Email" class="edit form-control" type="email">
+            <input ng-model="profileCtrl.profile.email" placeholder="Email" class="edit form-control" type="email">
           </li>
-          <div ng-click="perfilCtrl.editarPerfil(perfilCtrl.perfil)" class="panel-footer">
+          <div ng-click="profileCtrl.editProfile(profileCtrl.profile)" class="panel-footer">
             <button type="button" class="btn btn-default btn-lg">
               Terminar de editar
             </button>
@@ -58,7 +58,7 @@
       </div> 
     </form>
   </div>
-  <div ng-hide="perfilCtrl.loginServicio.logeado">
+  <div ng-hide="profileCtrl.loginService.loggedIn">
     <h1>No estas logeado. <a ui-sref="login">Logearse</a></h1>
   </div>
 </div>

@@ -85,15 +85,15 @@ input.ng-invalid {
 .form-profile {
 
 }
-  .form-profile .form-profile-nombre-completo {
+  .form-profile .form-profile-full-name {
 
   }
-    .form-profile .form-profile-nombre-completo input:first-of-type {
+    .form-profile .form-profile-full-name input:first-of-type {
       margin-bottom: -1px;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }
-    .form-profile .form-profile-nombre-completo input:last-of-type {
+    .form-profile .form-profile-full-name input:last-of-type {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
     }
