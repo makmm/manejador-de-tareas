@@ -57,8 +57,11 @@ typings/
 # dotenv environment variables file
 .env
 
+# Vim
+*.swp
+
 # heroku
 app.json
 
 # Cosas del proyecto
-config.json
+config.js

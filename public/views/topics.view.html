@@ -1,0 +1,37 @@
+<div id="topics">
+  <div id="toolbar">
+    <button class="btn btn-primary" ng-click="topicsCtrl.startNewTopic()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Crear Materia
+    </button>
+    <button class="btn btn-primary" ng-click="topicsCtrl.updateTopics()">
+      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+      Recargar
+    </button>
+  </div>
+  <ul class="list-group panel panel-default">
+    <li ng-repeat="topic in topicsCtrl.topics track by $index" ng-dblclick="topicsCtrl.startEditingTopic(topic)" class="topic list-group-item">
+      <div class="info-topic" ng-hide="topicsCtrl.topicBeingEdited == topic">
+        <h4>{{topic.name}}</h4>
+      </div>
+      <div class="edit-topic" ng-show="topicsCtrl.topicBeingEdited == topic">
+        <form ng-submit="topicsCtrl.editTopic(topic)">
+          <input ng-model="topic.name" placeholder="Titulo de Materia" class="edit form-control" type="edit">
+        </form>
+      </div>
+      <div class="btn-toolbar btn-group" role="group">
+        <button ng-click="topicsCtrl.toggleEditTopic(topic)" class="btn btn-primary btn-accion-topic" aria-label="Editar">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </button>
+        <button ng-click="topicsCtrl.deleteTopic(topic)" class="btn btn-danger btn-accion-topic" aria-label="Eliminar">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </button>
+      </div>
+    </li>
+    <li ng-show="topicsCtrl.creating" class="topic list-group-item">
+      <form ng-submit="topicsCtrl.addTopic(topicsCtrl.newTopic)">
+        <input ng-model="topicsCtrl.newTopic.name" placeholder="Titulo de Materia" class="edit form-control" type="edit">
+      </form>
+    </li>
+  </ul>
+</div>
