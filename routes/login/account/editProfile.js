@@ -1,7 +1,7 @@
 module.exports = async (app) => {
   const User = require('../../../config/schemas/user.js')
 
-  app.patch('/login/account',
+  app.patch('/login/profile',
     require('../../../utils/login.js').isLoggedIn,
     async (req, res) => {
       try {
