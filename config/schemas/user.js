@@ -29,7 +29,7 @@ userSchema.methods.changePassword = function(password){
 
   this.password = hash.createHash(password)
 
-  return;
+  return
 }
 
 userSchema.methods.comparePasswords = function(password){
