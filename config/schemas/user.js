@@ -38,6 +38,18 @@ userSchema.methods.comparePasswords = function(password){
   return hash.comparePasswords(password, this.password)
 }
 
+userSchema.statics.isConflicting = async function(otherUser){
+  const userConflict = await this.findOne({user: otherUser.user})
+  const emailConflict = await this.findOne({email: otherUser.email})
+  if(userConflict instanceof Object &&
+    !userConflict.equals(otherUser))
+    return "user"
+  else if(emailConflict instanceof Object &&
+    !emailConflict.equals(otherUser))
+    return "email"
+  else return false
+}
+
 userSchema.query.byUser = function(user){
   return this.findOne({user: user})
 }
